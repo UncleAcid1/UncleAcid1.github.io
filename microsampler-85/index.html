@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microsampler 85'</title>
+<meta name="description" content="Microsampler 85' by Brownie Digital: an 8-bit vintage sampler for macOS. Instrument and effect plug-in (AU, VST3) and a stand-alone app. $10.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css?v=11">
+<link rel="stylesheet" href="ms85.css?v=3">
+<meta property="og:title" content="Microsampler 85' by Brownie Digital">
+<meta property="og:description" content="An 8-bit vintage sampler for your Mac: crunchy 9 kHz sampling, circuit bends, a rhythm box. $10.">
+<meta property="og:image" content="https://uncleacid1.github.io/img/window-black-grille.jpg">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="mark" href="../"><img src="../img/brownie-dither.png" alt="" width="24" height="24"><span>Brownie Digital</span></a>
+    <nav class="nav">
+      <a href="../microsampler-85/" aria-current="page">Microsampler 85'</a>
+      <a href="../#stone">STONE</a>
+      <a href="../#guestbook">Guestbook</a>
+      <a href="../support/">Help</a>
+    </nav>
+    <span class="clock" id="clock"></span>
+  </div>
+</header>
+
+<main class="ms">
+  <!-- 1 · faceplate -->
+  <section class="face">
+    <div class="wrap face-grid">
+      <div class="mold">
+        <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
+        <div class="lbl">brownie digital · release 001</div>
+        <img class="logo" src="../img/logo-ms85.png" alt="Microsampler 85'" width="619" height="177">
+        <h1 data-lofi="0.34" data-sy="1.4" data-tear><span class="ln">8-bit sampler</span><span class="ln" style="color: #3fb2e6">1985 → now</span></h1>
+        <p>A careful rebuild of a classic 1985 home keyboard sampler: the gritty 9 kHz sampling, the lo-fi playback filter, the little rhythm box. Plus the circuit-bending tricks people love it for.</p>
+        <div class="lcd" aria-hidden="true"><span class="run">9.4 kHz · 8 BIT · 1.47 SEC · 13 ENVELOPES · 11 RHYTHMS · CLOCK BEND · GLITCH · STUTTER · 2 LFOS · AU · VST3 · APP ·</span></div>
+        <div class="keys">
+          <a class="key" href="#buy"><i></i>buy · $10</a>
+          <a class="key grey" href="#trial"><i></i>free trial</a>
+          <a class="key grey" href="#features"><i></i>features</a>
+        </div>
+      </div>
+      <div class="mold screen-wrap">
+        <div class="flyer o price">$10!<small>one time</small></div>
+        <img id="hero-shot" src="../img/window-black-bends.jpg" alt="Microsampler 85' with the black skin and the circuit bend settings open" width="1916" height="710">
+        <div class="skins" role="group" aria-label="Skin">skin
+          <button type="button" data-skin="black" aria-pressed="true" aria-label="Black skin"></button>
+          <button type="button" data-skin="pink" aria-pressed="false" aria-label="Pink skin"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · the break -->
+  <section class="breaks" aria-label="A drum pattern">
+    <div class="wrap">
+      <div class="lcd" style="font-size: 26px">AMEN @ 160</div>
+      <div class="steps" id="steps" aria-hidden="true"></div>
+    </div>
+    <div class="gif-row" style="max-width: var(--wrap); margin: 0 auto; padding: 4px 16px 20px; justify-content: space-around"><img class="gif" src="../img/gif/skeleton.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/cassette.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/drum.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/guitar.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/speaker-btn.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/cd-2.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/dancer.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/music-speaker.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/floppy-robot.gif" alt="" loading="lazy"></div>
+  </section>
+
+  <!-- 3 · features, laid out like the panel -->
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-lofi="0.4" data-sy="1.3"><span class="ln">what's on the panel</span></h2>
+        <span class="lbl">the original first, then the extras</span>
+      </div>
+      <div class="ctrl">
+        <div class="mold wide"><div class="lbl">sample <span class="mini-keys"><span class="y"></span><span class="y"></span></span></div><h3>sampling with grit</h3><p>Record your mic or drop in any audio file. 8-bit at about 9.4 kHz, with the original's aliasing and hiss. 1.47 seconds like 1985, or up to 30 s. Mono or stereo. Trim, loop, normalise, export as an 8-bit WAV.</p></div>
+        <div class="mold"><div class="lbl">tone <span class="mini-keys"><span></span><span class="b"></span><span></span></span></div><h3>8 built-in tones</h3><p>Piano, trumpet, human voice, pipe organ, brass, flute, synth drums and jazz organ, from your own tone ROM, tuned like the hardware.</p></div>
+        <div class="mold"><div class="lbl">envelope <span class="knob" style="--r: 30deg"></span></div><h3>13 envelopes + ADSR</h3><p>Every original envelope, measured from the real thing, plus portamento and vibrato. Or draw your own ADSR.</p></div>
+        <div class="mold"><div class="lbl">circuit bend <span class="knob red" style="--r: -60deg"></span></div><h3>clock bend, glitch, stutter</h3><p>The bend knob drags the clock two octaves down or one up. Glitch and stutter recreate the classic shorted-pin bends.</p></div>
+        <div class="mold"><div class="lbl">lfo <span class="knob" style="--r: 80deg"></span></div><h3>two LFOs</h3><p>Seven shapes from sine to stepped random, free or synced, each able to move the bend, glitch and stutter.</p></div>
+        <div class="mold wide"><div class="lbl">rhythm <span class="mini-keys"><span></span><span></span><span class="b"></span><span></span></span></div><h3>rhythm box + drum editor</h3><p>The original's 11 rhythms (disco to waltz), 8 extra patterns (boom bap, breakbeat, electro, dub, trip hop…) and a step editor for your own. Typed tempo, or follow your DAW.</p></div>
+        <div class="mold"><div class="lbl">filter <span class="knob" style="--r: -10deg"></span></div><h3>four filters</h3><p>The original playback filter, a brighter one, wide open (every step and alias comes through), or smooth.</p></div>
+        <div class="mold"><div class="lbl">live in <span class="mini-keys"><span class="y"></span></span></div><h3>the FX version</h3><p>A separate effect for audio tracks: run guitars, synths, drums or vocals through the 8-bit circuit live, with level and dry/wet.</p></div>
+        <div class="mold"><div class="lbl">presets <span class="mini-keys"><span></span><span></span></span></div><h3>and the rest</h3><p>Built-in and user presets, mono / duo / 4 / 8 voices, chords, noise, two skins, computer-keyboard playing in the app.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · screens -->
+  <section style="padding-top: 0">
+    <div class="wrap screens">
+      <figure><img src="../img/bay-pink-sample.jpg" alt="The sample screen" width="520" height="854" loading="lazy"><figcaption>SAMPLE</figcaption></figure>
+      <figure><img src="../img/bay-black-drums.jpg" alt="The drum editor" width="520" height="854" loading="lazy"><figcaption>DRUMS</figcaption></figure>
+      <figure><img src="../img/bay-pink-lfo.jpg" alt="The two LFOs" width="520" height="854" loading="lazy"><figcaption>LFO</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 5 · ROM + trial -->
+  <section id="trial" style="padding-top: 20px">
+    <div class="wrap pair">
+      <div class="paper halftone" id="rom">
+        <span class="tape"></span>
+        <h3>!! the tone ROM is not included !!</h3>
+        <p>The 8 built-in tones live in the original keyboard's tone ROM, which Brownie Digital can't sell you. The first time you open it, Microsampler 85' asks for your own copy (a 32,768-byte file, from hardware you own). It's checked, then kept on your Mac.</p>
+        <p style="margin: 0">Only the 8 tones need it. The sampler, the rhythm box, the circuit bends, the LFOs and the effect plug-in all work without it.</p>
+      </div>
+      <div class="mold">
+        <span class="screw tl"></span><span class="screw tr"></span>
+        <h3 class="big">free trial</h3>
+        <p>Same installer as the full version. Until you unlock it, it plays like the original keyboard:</p>
+        <ul>
+          <li>the built-in tones (with your ROM), envelopes, portamento, vibrato and rhythms, 4 voices</li>
+          <li>the stand-alone app samples like the original: 1.47 seconds, mono</li>
+        </ul>
+        <p>Your licence key unlocks everything else, in the plug-ins too.</p>
+        <div class="keys" style="margin-top: 18px"><a class="key" href="https://github.com/UncleAcid1/UncleAcid1.github.io/releases/latest/download/Microsampler-85.pkg"><i></i>download trial</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · specs + install -->
+  <section>
+    <div class="wrap pair">
+      <div>
+        <div class="lbl" style="margin-bottom: 10px">system</div>
+        <div class="spec-lcd">
+          <div><span>MAC</span><span>APPLE SILICON (M1+)</span></div>
+          <div><span>MACOS</span><span>11 BIG SUR OR NEWER</span></div>
+          <div><span>FORMATS</span><span>AU + VST3 INSTRUMENT, AU + VST3 FX, APP</span></div>
+          <div><span>HOSTS</span><span>MADE + TESTED IN LOGIC PRO; ANY AU/VST3 HOST</span></div>
+          <div><span>LICENCE</span><span>1 KEY = 3 OF YOUR MACS</span></div>
+          <div><span>INTERNET</span><span>TO UNLOCK + AN OCCASIONAL CHECK</span></div>
+          <div><span>NOT INCLUDED</span><span>THE TONE ROM</span></div>
+        </div>
+      </div>
+      <div class="howto halftone">
+        <h3>how to get in</h3>
+        <ol>
+          <li><span>Double-click the installer (<b>Microsampler-85.pkg</b>). macOS will say it can't check it: Brownie Digital isn't in Apple's paid developer programme. Click Done.</span></li>
+          <li><span>System Settings › Privacy &amp; Security, scroll to Security, click <b>Open Anyway</b>. Only once.</span></li>
+          <li><span>Follow the installer. In Logic: Software Instrument › AU Instruments › Brownie Digital. FX: Audio FX › Audio Units › Brownie Digital.</span></li>
+          <li><span>Point it at your tone ROM, then <b>Unlock</b> in the menu bar and paste the key from your email.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · buy -->
+  <section class="buy" id="buy" style="padding-bottom: 90px">
+    <div class="wrap">
+      <div class="mold">
+        <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
+        <div class="lcd price-lcd">$10</div>
+        <div>
+          <h2 data-lofi="0.4" data-sy="1.3" style="margin: 0 0 10px; font-family: var(--serif); font-weight: 400; font-size: clamp(1.2rem, 2.6vw, 1.7rem); color: #fff"><span class="ln">get microsampler 85'</span></h2>
+          <p style="margin: 0">One payment, no subscription. The instrument, the effect and the app. Checkout and your licence key come from Lemon Squeezy, who handle sales tax. The download link and key arrive by email straight away. <a href="../support/#refunds" style="color: #3fb2e6">14-day refunds</a>.</p>
+        </div>
+        <a class="arcade buy-link" href="#buy">BUY</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="cell"><img src="../img/gif/Globe_Spinning.gif" alt="" width="18" height="18">Done</span>
+    <span class="cell grow"><nav><a href="../">Home</a><a href="../microsampler-85/">Microsampler 85'</a><a href="../support/">Help</a><a href="../support/#refunds">Refunds</a><a href="../support/#privacy">Privacy</a></nav></span>
+    <span class="cell">© 2026 Brownie Digital · Kiki Wafford</span>
+    <span class="cell zone"><img src="../img/brownie-dither.png" alt="" width="18" height="18">Brownie zone</span>
+  </div>
+</footer>
+
+<script src="../js/site.js?v=7" defer></script>
+<script>
+  // skin switch for the big screenshot
+  (function () {
+    var img = document.getElementById("hero-shot");
+    var shots = { black: ["../img/window-black-bends.jpg", "Microsampler 85' with the black skin and the circuit bend settings open"],
+                  pink: ["../img/window-pink-sample.jpg", "Microsampler 85' with the pink skin and the sample screen open"] };
+    new Image().src = shots.pink[0];
+    document.querySelectorAll(".skins button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        img.src = shots[b.dataset.skin][0]; img.alt = shots[b.dataset.skin][1];
+        document.querySelectorAll(".skins button").forEach(function (o) { o.setAttribute("aria-pressed", o === b); });
+      });
+    });
+  })();
+  // the amen break as a step grid, running at 160 BPM while it's on screen
+  (function () {
+    var rows = [["kick", [0, 2, 10, 11]], ["snare", [4, 7, 9, 12, 15]], ["ride", [0, 2, 4, 6, 8, 10, 12, 14]], ["crash", [0]]];
+    var el = document.getElementById("steps"), cells = [];
+    rows.forEach(function (r) {
+      var b = document.createElement("b"); b.textContent = r[0]; el.appendChild(b);
+      for (var i = 0; i < 16; i++) { var c = document.createElement("i"); if (r[1].indexOf(i) >= 0) c.className = "on"; c.dataset.col = i; el.appendChild(c); cells.push(c); }
+    });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var col = 0, timer = null;
+    function tick() {
+      cells.forEach(function (c) { var hit = +c.dataset.col === col; c.classList.toggle("hit", hit && c.classList.contains("on")); c.classList.toggle("col-hl", hit); });
+      col = (col + 1) % 16;
+    }
+    el.classList.add("go");
+    new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting && !timer) timer = setInterval(tick, 94);   // 16th notes at 160 BPM
+      else if (!es[0].isIntersecting && timer) { clearInterval(timer); timer = null; }
+    }).observe(el);
+  })();
+</script>
+</body>
+</html>

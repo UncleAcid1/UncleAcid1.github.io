@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brownie Digital Help</title>
+<meta name="description" content="Help, refunds, privacy and credits for Brownie Digital software.">
+<link rel="icon" href="../img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css?v=10">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="mark" href="../"><img src="../img/brownie-dither.png" alt="" width="24" height="24"><span>Brownie Digital</span></a>
+    <nav class="nav">
+      <a href="../microsampler-85/">Microsampler 85'</a>
+      <a href="../#stone">STONE</a>
+      <a href="../#guestbook">Guestbook</a>
+      <a href="../support/" aria-current="page">Help</a>
+    </nav>
+    <span class="clock" id="clock"></span>
+  </div>
+</header>
+
+<main class="doc">
+  <div class="wrap">
+    <h1 data-lofi="0.34" data-sy="1.35" data-tear><span class="ln">help</span><span class="ln" style="color: var(--brown-300)">refunds · privacy</span></h1>
+    <p class="lede">Brownie Digital is one person, so you always hear back from whoever made the thing.</p>
+    <div class="gif-row" style="justify-content: flex-start"><img class="gif" src="../img/gif/construction-sign.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/3d-email.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/mailbox-b.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/coputype.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/3d-hourglass.gif" alt="" loading="lazy"></div>
+
+    <div class="card" id="contact">
+      <h2>get in touch</h2>
+      <p>Email <a href="mailto:bennettkiki5@gmail.com">bennettkiki5@gmail.com</a>. Say which Mac and macOS you're on, which host (Logic, Live…) and, for licence questions, the email you bought with. Replies usually within two days.</p>
+    </div>
+
+    <h2 class="sub">common questions</h2>
+    <details class="card"><summary>macOS says it can't open the installer</summary><p>Expected: Brownie Digital isn't in Apple's paid developer programme. Click Done, open System Settings › Privacy &amp; Security, scroll to Security and click <b>Open Anyway</b> next to the installer's name. Only once.</p></details>
+    <details class="card"><summary>The plug-in doesn't show up in Logic</summary><p>Logic Pro › Settings › Plug-in Manager, select Brownie Digital, click "Reset &amp; Rescan Selection".</p></details>
+    <details class="card"><summary>I lost my licence key</summary><p>It's in your purchase email from Lemon Squeezy, and always at <a href="https://app.lemonsqueezy.com/my-orders">app.lemonsqueezy.com/my-orders</a> with the email you bought with.</p></details>
+    <details class="card"><summary>I got a new Mac</summary><p>One key unlocks 3 Macs. If you've used all three, email and I'll free them up.</p></details>
+    <details class="card"><summary>Does it need the internet?</summary><p>Only to unlock, and for a quick licence check now and then. Offline it keeps working for 30 days at a time.</p></details>
+    <details class="card"><summary>How do I uninstall it?</summary><p>Delete "Microsampler 85.component" and "Microsampler 85 FX.component" from /Library/Audio/Plug-Ins/Components, the two ".vst3" files from /Library/Audio/Plug-Ins/VST3, and the app from /Applications.</p></details>
+
+    <div class="card" id="refunds">
+      <h2>refunds</h2>
+      <p>Try the free trial first: it's the same download, so you can check it runs on your Mac before paying.</p>
+      <p>If it doesn't work on your Mac and we can't fix it, or you're simply not happy, email within <b>14 days</b> of buying for a full refund. No forms. A refunded licence key stops working.</p>
+      <p style="margin: 0">Payments and refunds are processed by Lemon Squeezy, the reseller and merchant of record for Brownie Digital orders.</p>
+    </div>
+
+    <div class="card" id="privacy">
+      <h2>privacy</h2>
+      <p><b>This website</b> has no cookies, no analytics and no tracking. It's hosted on GitHub Pages, which keeps standard server logs.</p>
+      <p><b>Buying</b> happens on Lemon Squeezy's checkout, under <a href="https://www.lemonsqueezy.com/privacy">their privacy policy</a>. Brownie Digital sees your name, email and order, never your card.</p>
+      <p><b>The licence check.</b> When you unlock Microsampler 85', and about once a day after that while you're online, it sends your licence key (and the activation ID Lemon Squeezy gave that Mac) to Lemon Squeezy's licence server. When it unlocks a Mac it also sends that Mac's name (as set in System Settings), so you can tell your 3 activations apart. Nothing else: no music, no samples, no usage data.</p>
+      <p style="margin: 0"><b>Microphone.</b> The app only listens when you press SAMPLING or switch on live input, and the audio never leaves your Mac.</p>
+    </div>
+
+    <div class="card" id="credits">
+      <h2>credits</h2>
+      <p>Microsampler 85' was created by Kiki Wafford. Audio engine and testing made with the assistance of Claude AI.</p>
+      <p style="margin: 0">Old-web GIFs on this site come from the GeoCities archive (GifCities, Internet Archive) and BrycesPix.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="cell"><img src="../img/gif/Globe_Spinning.gif" alt="" width="18" height="18">Done</span>
+    <span class="cell grow"><nav><a href="../">Home</a><a href="../microsampler-85/">Microsampler 85'</a><a href="../support/">Help</a><a href="../support/#refunds">Refunds</a><a href="../support/#privacy">Privacy</a></nav></span>
+    <span class="cell">© 2026 Brownie Digital · Kiki Wafford</span>
+    <span class="cell zone"><img src="../img/brownie-dither.png" alt="" width="18" height="18">Brownie zone</span>
+  </div>
+</footer>
+<script src="../js/site.js?v=7" defer></script>
+</body>
+</html>
