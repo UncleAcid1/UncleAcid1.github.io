@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=DotGothic16&family=Hind:wght@400;600&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=15">
+<link rel="stylesheet" href="style.css?v=20">
 <meta property="og:title" content="Brownie Digital">
 <meta property="og:description" content="Home-baked instruments, crunchy round the edges. First release: Microsampler 85', an 8-bit vintage sampler for Mac.">
 <meta property="og:image" content="https://uncleacid1.github.io/img/window-black-grille.jpg">
@@ -182,11 +182,11 @@
     <!-- Rule the Kingdom: the city, the logo, the advisor's dialog box -->
     <div class="rtk">
       <div class="wrap">
-        <img class="rtk-logo" src="img/gh/rtk/logo.webp" alt="Rule the Kingdom" width="420" height="291" loading="lazy">
-        <p class="rtk-chapter"><span>RTKContinued</span><small>The Story Continues</small></p>
+        <p class="sq-label">RTKContinued <span>a C++ port of Rule the Kingdom</span></p>
+        <img class="rtk-logo" src="img/gh/rtk/logo.webp" alt="Rule the Kingdom" width="419" height="267" loading="lazy">
 
         <div class="rtk-dlg has-face">
-          <img class="rtk-face" src="img/gh/rtk/advisor.webp" alt="" width="104" height="104" loading="lazy">
+          <img class="rtk-face" src="img/gh/rtk/mentor-face.webp" alt="" width="200" height="200" loading="lazy">
           <p><i>Rule the Kingdom</i> was a city-building RPG on Android from 2012, made by innoWate and put out by Game Insight. I played it for hours with my mom. It needed the publisher's servers for basically everything, so when those shut down the game just stopped working.</p>
         </div>
         <div class="rtk-dlg">
@@ -212,8 +212,10 @@
       <img class="mm-moon" src="img/gh/mm/moon.webp" alt="" aria-hidden="true" loading="lazy">
       <img class="mm-cloud c1" src="img/gh/mm/cloud1.webp" alt="" aria-hidden="true" loading="lazy">
       <img class="mm-cloud c2" src="img/gh/mm/cloud3.webp" alt="" aria-hidden="true" loading="lazy">
-      <img class="mm-house" src="img/gh/mm/mansion.webp" alt="" aria-hidden="true" loading="lazy">
+      <!-- mansion, flag and Jack at the title screen's own coordinates (1280 wide, shifted down 715px) -->
+      <div class="mm-scene" aria-hidden="true"><img class="mm-house" src="img/gh/mm/mansion.webp" alt="" loading="lazy"><span class="mm-flag"></span></div>
       <img class="mm-fog" src="img/gh/mm/fog.webp" alt="" aria-hidden="true" loading="lazy">
+      <div class="mm-scene front" aria-hidden="true"><span class="mm-jack"></span></div>
       <div class="wrap">
         <div class="mm-col">
           <img class="mm-logo" src="img/gh/mm/logo.webp" alt="Midnight Mansion HD" width="888" height="128" loading="lazy">
@@ -222,7 +224,8 @@
             <p><i>Midnight Mansion HD</i> is Vern Jensen's puzzle platformer from 2011: Jack Malone sneaking through haunted mansions full of levers, keys, secret passages, Medusas and spiders. The Mac version doesn't run on new Macs anymore, so I rebuilt it from the original release.</p>
             <p>With the new options off it plays exactly like the original. Turn them on and you get 2–4 player split screen, co-op, a ghost race mode, LAN and online play with friend codes, 89 community mansions, and dumb stuff like moon gravity and <i>Oops! All Spiders</i>. Runs on Mac, Linux, and somehow a PS3.</p>
             <img class="mm-shot" src="img/gh/mm/split4.webp" alt="Four players in split screen in the same mansion room" width="640" height="480" loading="lazy">
-            <p class="mm-credit">Midnight Mansion was created by Vern Jensen. This is me keeping the lights on.</p>
+            <div class="mm-new"><img class="mm-henry" src="img/gh/mm/henry.webp" alt="Henry Malone, arms crossed" width="91" height="129" loading="lazy"><p><b>Meet Henry Malone.</b> He's a whole new playable character I designed for After Midnight, and he's player 2 by default, with his own sprites, so you can always tell who's who in split screen.</p></div>
+            <p class="mm-credit">Midnight Mansion was created by Vern Jensen.</p>
           </div>
           <a class="mm-open" href="https://github.com/UncleAcid1/after-midnight" target="_blank" rel="noopener" aria-label="Open After Midnight on GitHub"><img src="img/gh/mm/btn-open.webp" alt="" width="360" height="60"><img class="hi" src="img/gh/mm/btn-open-hi.webp" alt="" width="360" height="60"></a>
         </div>

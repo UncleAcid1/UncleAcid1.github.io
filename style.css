@@ -325,6 +325,9 @@ html.stone-mode { filter: invert(1) hue-rotate(180deg); }
 .sq-head { font-family: var(--chunky); font-weight: 700; font-size: 26px; color: var(--brown-300); margin: 0 0 6px; text-transform: lowercase; }
 .sq-intro { color: var(--cream-2); max-width: 40em; font-size: 16px; margin: 0 0 34px; }
 .sq-intro a { color: var(--cream); }
+.sq-label { display: inline-block; margin: 0; font: 700 15px/1 var(--chunky); color: var(--cream); background: var(--brown-900); padding: 8px 12px; box-shadow: 3px 3px 0 rgba(0,0,0,.45); }
+.sq-label span { font-family: var(--round); font-weight: 400; font-size: 13px; color: var(--cream-2); margin-left: 8px; }
+.rtk .sq-label { display: table; margin: 0 auto 0 0; }
 .sq-note { margin: 40px 0 0; font-size: 14px; line-height: 1.7; color: var(--cream-2); max-width: 52em; }
 .sq-note b { color: var(--brown-300); font-weight: 400; }
 
@@ -333,18 +336,14 @@ html.stone-mode { filter: invert(1) hue-rotate(180deg); }
   background: url("img/gh/rtk/city.webp") center / cover; }
 .rtk::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 50% 30%, rgba(20,40,10,.15), rgba(15,25,5,.65)); }
 .rtk .wrap { max-width: 860px; text-align: center; }
-.rtk-logo { width: min(330px, 70%); margin: 0 auto -8px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.45)); }
-.rtk-chapter { margin: 0 0 26px; font: 900 clamp(30px, 5vw, 46px)/1.05 "Arial Black", "Arial Bold", Arial, sans-serif; }
-.rtk-chapter span, .rtk-chapter small { display: block; background: linear-gradient(#fff6b0, #ffd23a 45%, #e59a10); -webkit-background-clip: text; background-clip: text; color: transparent;
-  -webkit-text-stroke: 1.5px #5a3205; filter: drop-shadow(0 3px 0 rgba(60,30,0,.6)); }
-.rtk-chapter small { font-size: .62em; margin-top: 6px; background: linear-gradient(#fff, #f3ead2); -webkit-background-clip: text; background-clip: text; -webkit-text-stroke: 1px #3a2a12; }
+.rtk-logo { width: min(340px, 72%); margin: 8px auto 26px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.45)); }
 .rtk-dlg { position: relative; margin: 0 auto 16px; max-width: 680px; padding: 16px 26px 14px; text-align: center;
   background: linear-gradient(#fdf8ec, #f1e3c4); border: 3px solid #c79a4e; border-radius: 6px;
   box-shadow: 0 0 0 2px #6e4a1c, 0 8px 18px rgba(0,0,0,.4); color: #2e2416; font: 700 15.5px/1.5 "Trebuchet MS", Arial, sans-serif; }
 .rtk-dlg p { margin: 0; }
 .rtk-dlg.has-face { padding-left: 120px; text-align: left; }
-.rtk-face { position: absolute; left: -14px; top: 50%; width: 112px; height: 112px; transform: translateY(-50%); border-radius: 50%;
-  border: 5px solid #d9b46a; box-shadow: 0 0 0 2px #6e4a1c, 0 4px 10px rgba(0,0,0,.4); background: #3a7bbd; }
+.rtk-face { position: absolute; left: -14px; top: 50%; width: 112px; height: 112px; transform: translateY(-50%); border-radius: 50%; object-fit: cover;
+  border: 5px solid #d9b46a; box-shadow: 0 0 0 2px #6e4a1c, 0 4px 10px rgba(0,0,0,.4); background: radial-gradient(circle at 50% 35%, #7fc0ef, #3a7bbd); }
 .rtk-tap { display: block; margin-top: 8px; font-size: 12.5px; color: #7a5a2a; }
 .rtk-row { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; margin: 26px 0 26px; align-items: start; }
 .rtk-tv { margin: 0; border: 4px solid #d9b46a; box-shadow: 0 0 0 2px #6e4a1c, 0 8px 18px rgba(0,0,0,.45); background: #000; }
@@ -365,32 +364,46 @@ html.stone-mode { filter: invert(1) hue-rotate(180deg); }
 /* Midnight Mansion: the game's title screen, rebuilt from its layers */
 .mm { position: relative; overflow: hidden; isolation: isolate; padding: 64px 0 80px; min-height: 760px; -webkit-font-smoothing: antialiased;
   background: #0b1630 url("img/gh/mm/stars.webp") center / cover; }
-.mm::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; box-shadow: inset 0 0 160px 40px rgba(0,0,0,.75); }
+.mm::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; box-shadow: inset 0 0 120px 20px rgba(0,0,0,.6); }
 .mm > img { position: absolute; pointer-events: none; }
 .mm-moon { width: 190px; left: 6%; top: 70px; z-index: 0; filter: drop-shadow(0 0 40px rgba(140,230,230,.45)); }
 .mm-cloud { z-index: 1; opacity: .5; animation: mm-drift 70s linear infinite; }
 .mm-cloud.c1 { width: 170px; top: 60px; left: -10%; }
 .mm-cloud.c2 { width: 190px; top: 220px; left: -20%; animation-duration: 95s; animation-delay: -40s; }
 @keyframes mm-drift { to { transform: translateX(130vw); } }
-.mm-house { z-index: 1; right: 0; bottom: 0; width: min(900px, 70vw); height: auto; max-width: none; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 30%); mask-image: linear-gradient(to right, transparent 0, #000 30%); }
 .mm-fog { z-index: 2; left: 0; bottom: -20px; width: 100%; height: 300px; object-fit: cover; opacity: .85; -webkit-mask-image: linear-gradient(transparent, #000 45%); mask-image: linear-gradient(transparent, #000 45%); }
+.mm { min-height: calc(min(860px, 66vw) * 1.3086 + 10px); }
+.mm-scene { position: absolute; z-index: 1; right: 0; bottom: 0; width: min(860px, 66vw); aspect-ratio: 1280 / 1675; pointer-events: none; }
+.mm-scene .mm-house { position: absolute; inset: 0; width: 100%; height: 100%; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 30%); mask-image: linear-gradient(to right, transparent 0, #000 30%); }
+.mm-scene.front { z-index: 3; }
+.mm-flag, .mm-jack { position: absolute; background-repeat: no-repeat; background-size: 100% 300%; animation-timing-function: steps(1, end); animation-iteration-count: infinite; }
+.mm-flag { left: 77.27%; top: 0; width: 7.8125%; aspect-ratio: 100 / 70; background-image: url("img/gh/mm/flag.webp"); animation-name: mm-frames; animation-duration: .57s; }
+.mm-jack { left: 50%; top: 88%; width: 12.5%; aspect-ratio: 160 / 96; background-image: url("img/gh/mm/jack.webp"); animation-name: mm-frames; animation-duration: .4s; }
+@keyframes mm-frames { 0% { background-position: 0 0; } 25% { background-position: 0 50%; } 50% { background-position: 0 100%; } 75% { background-position: 0 50%; } }
+.mm-new { display: flex; gap: 14px; align-items: center; margin: 4px 0 14px; padding: 10px 12px; background: rgba(20,10,4,.45); border: 1px solid rgba(241,223,138,.25); }
+.mm-new p { margin: 0 !important; font-size: 15px; }
+.mm-new b { font: 400 21px/1 "Black Chancery", serif; color: #f1df8a; }
+.mm-henry { flex: none; width: 74px; height: auto; filter: drop-shadow(0 3px 3px rgba(0,0,0,.6)); }
 .mm .wrap { z-index: 3; }
 .mm-col { max-width: 560px; }
 .mm-logo { width: 100%; filter: drop-shadow(0 4px 8px rgba(0,0,0,.6)); }
-.mm-sub { font: 400 40px/1 "Black Chancery", serif; color: #f1df8a; text-shadow: 0 2px 0 #3a2a05, 0 0 12px rgba(0,0,0,.8); margin: 4px 0 18px 46%; white-space: nowrap; }
-.mm-board { position: relative; padding: 26px 30px 22px; background: url("img/gh/mm/wood.webp") center / 100% 100%; border-radius: 4px;
-  box-shadow: 0 12px 26px rgba(0,0,0,.6); color: #f6ead0; font: 400 16px/1.6 Georgia, "Times New Roman", serif; text-shadow: 0 1px 2px rgba(0,0,0,.9); }
+.mm-sub { font: 400 40px/1 "Black Chancery", serif; color: #f1df8a; text-shadow: 0 2px 0 #3a2a05, 0 0 12px rgba(0,0,0,.8); margin: 4px 0 18px; text-align: center; }
+.mm-board { position: relative; padding: 26px 30px 22px; background: url("img/gh/mm/wood.webp") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 10px 14px rgba(0,0,0,.6)); color: #f6ead0; font: 400 16px/1.6 Georgia, "Times New Roman", serif; text-shadow: 0 1px 2px rgba(0,0,0,.9); }
 .mm-board p { margin: 0 0 12px; }
 .mm-shot { width: 100%; margin: 6px 0 12px; border: 3px solid #2a170a; box-shadow: 0 0 0 1px #8a6234; }
 .mm-credit { font: 400 20px/1.3 "Black Chancery", serif; color: #f1df8a; margin: 0 !important; }
-.mm-open { position: relative; display: inline-block; margin: 18px 0 0 -6px; width: 300px; max-width: 100%; }
+
+.mm-open { position: relative; display: block; margin: 20px auto 0; width: 300px; max-width: 90%; }
 .mm-open img { width: 100%; filter: drop-shadow(0 2px 3px rgba(0,0,0,.8)); }
 .mm-open .hi { position: absolute; inset: 0; opacity: 0; transition: opacity .12s; }
+
 .mm-open:hover .hi, .mm-open:focus-visible .hi { opacity: 1; }
 @media (max-width: 880px) {
   .mm { min-height: 0; padding-bottom: 300px; }
-  .mm-house { width: 125%; right: 0; opacity: .95; }
-  .mm-sub { margin-left: 30%; font-size: 32px; }
+  .mm { min-height: 0; }
+  .mm-scene { width: 110%; }
+  .mm-sub { font-size: 32px; }
   .mm-moon { width: 120px; left: auto; right: 6%; top: 20px; }
 }
-@media (max-width: 480px) { .mm-board { padding: 20px 18px 16px; } .mm-sub { margin-left: 14%; } }
+@media (max-width: 480px) { .mm-board { padding: 20px 18px 16px; } }
