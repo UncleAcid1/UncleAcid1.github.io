@@ -310,3 +310,87 @@ html.stone-mode { filter: invert(1) hue-rotate(180deg); }
 @media (max-width: 700px) { .float-gif.hide-m { display: none; } }
 .home .float-gif { opacity: .95; }
 .aero .gif-row img { filter: drop-shadow(0 6px 10px rgba(0,60,120,.35)); }
+
+/* ---------- STONE logo sparkles ---------- */
+.stone-mark { position: relative; width: min(520px, 90%); margin-top: 26px; }
+.stone-mark .stone-logo { width: 100%; display: block; }
+.spk img { position: absolute; width: var(--s); height: auto; transform: translate(-50%, -50%); image-rendering: pixelated; pointer-events: none;
+  animation: twinkle 3.2s var(--d) ease-in-out infinite; }
+@keyframes twinkle { 0%, 100% { opacity: 1; } 45% { opacity: .3; } 60% { opacity: .9; } }
+@media (prefers-reduced-motion: reduce) { .spk img { animation: none; } }
+
+/* ---------- side quests: GitHub projects, each in its own game's art ---------- */
+@font-face { font-family: "Black Chancery"; src: url("fonts/BlackChancery.ttf") format("truetype"); font-display: swap; }
+.sidequests { background: var(--brown-900); padding: 64px 0 56px; border-top: 2px dashed var(--brown-700); }
+.sq-head { font-family: var(--chunky); font-weight: 700; font-size: 26px; color: var(--brown-300); margin: 0 0 6px; text-transform: lowercase; }
+.sq-intro { color: var(--cream-2); max-width: 40em; font-size: 16px; margin: 0 0 34px; }
+.sq-intro a { color: var(--cream); }
+.sq-note { margin: 40px 0 0; font-size: 14px; line-height: 1.7; color: var(--cream-2); max-width: 52em; }
+.sq-note b { color: var(--brown-300); font-weight: 400; }
+
+/* Rule the Kingdom: the city as the ground, the game's own dialog boxes on top */
+.rtk { position: relative; padding: 56px 0 64px; overflow: hidden; isolation: isolate; -webkit-font-smoothing: antialiased;
+  background: url("img/gh/rtk/city.webp") center / cover; }
+.rtk::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 50% 30%, rgba(20,40,10,.15), rgba(15,25,5,.65)); }
+.rtk .wrap { max-width: 860px; text-align: center; }
+.rtk-logo { width: min(330px, 70%); margin: 0 auto -8px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.45)); }
+.rtk-chapter { margin: 0 0 26px; font: 900 clamp(30px, 5vw, 46px)/1.05 "Arial Black", "Arial Bold", Arial, sans-serif; }
+.rtk-chapter span, .rtk-chapter small { display: block; background: linear-gradient(#fff6b0, #ffd23a 45%, #e59a10); -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-text-stroke: 1.5px #5a3205; filter: drop-shadow(0 3px 0 rgba(60,30,0,.6)); }
+.rtk-chapter small { font-size: .62em; margin-top: 6px; background: linear-gradient(#fff, #f3ead2); -webkit-background-clip: text; background-clip: text; -webkit-text-stroke: 1px #3a2a12; }
+.rtk-dlg { position: relative; margin: 0 auto 16px; max-width: 680px; padding: 16px 26px 14px; text-align: center;
+  background: linear-gradient(#fdf8ec, #f1e3c4); border: 3px solid #c79a4e; border-radius: 6px;
+  box-shadow: 0 0 0 2px #6e4a1c, 0 8px 18px rgba(0,0,0,.4); color: #2e2416; font: 700 15.5px/1.5 "Trebuchet MS", Arial, sans-serif; }
+.rtk-dlg p { margin: 0; }
+.rtk-dlg.has-face { padding-left: 120px; text-align: left; }
+.rtk-face { position: absolute; left: -14px; top: 50%; width: 112px; height: 112px; transform: translateY(-50%); border-radius: 50%;
+  border: 5px solid #d9b46a; box-shadow: 0 0 0 2px #6e4a1c, 0 4px 10px rgba(0,0,0,.4); background: #3a7bbd; }
+.rtk-tap { display: block; margin-top: 8px; font-size: 12.5px; color: #7a5a2a; }
+.rtk-row { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; margin: 26px 0 26px; align-items: start; }
+.rtk-tv { margin: 0; border: 4px solid #d9b46a; box-shadow: 0 0 0 2px #6e4a1c, 0 8px 18px rgba(0,0,0,.45); background: #000; }
+.rtk-tv video { display: block; width: 100%; aspect-ratio: 480 / 326; object-fit: cover; }
+.rtk-tv figcaption { font: 700 12.5px "Trebuchet MS", Arial, sans-serif; color: #f6e6b8; background: #4a3214; padding: 4px 8px; }
+.rtk-promo { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.rtk-promo img { width: 100%; border: 2px solid #e8c56a; box-shadow: 0 4px 10px rgba(0,0,0,.4); }
+.rtk-btn { display: inline-block; text-decoration: none; padding: 12px 28px; border-radius: 30px; font: 900 18px "Arial Black", Arial, sans-serif; color: #fff;
+  background: linear-gradient(#ffd85a, #e8960e); border: 3px solid #fff1b8; box-shadow: 0 0 0 2px #6e3e05, 0 6px 0 #6e3e05, 0 10px 16px rgba(0,0,0,.4);
+  text-shadow: 0 2px 0 #7a4200, 0 0 2px #7a4200; transition: transform .1s; }
+.rtk-btn:hover { transform: translateY(-2px); }
+@media (max-width: 680px) {
+  .rtk-row { grid-template-columns: 1fr; }
+  .rtk-dlg.has-face { padding: 64px 18px 14px; text-align: center; margin-top: 60px; }
+  .rtk-face { left: 50%; top: -52px; transform: translateX(-50%); width: 96px; height: 96px; }
+}
+
+/* Midnight Mansion: the game's title screen, rebuilt from its layers */
+.mm { position: relative; overflow: hidden; isolation: isolate; padding: 64px 0 80px; min-height: 760px; -webkit-font-smoothing: antialiased;
+  background: #0b1630 url("img/gh/mm/stars.webp") center / cover; }
+.mm::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; box-shadow: inset 0 0 160px 40px rgba(0,0,0,.75); }
+.mm > img { position: absolute; pointer-events: none; }
+.mm-moon { width: 190px; left: 6%; top: 70px; z-index: 0; filter: drop-shadow(0 0 40px rgba(140,230,230,.45)); }
+.mm-cloud { z-index: 1; opacity: .5; animation: mm-drift 70s linear infinite; }
+.mm-cloud.c1 { width: 170px; top: 60px; left: -10%; }
+.mm-cloud.c2 { width: 190px; top: 220px; left: -20%; animation-duration: 95s; animation-delay: -40s; }
+@keyframes mm-drift { to { transform: translateX(130vw); } }
+.mm-house { z-index: 1; right: 0; bottom: 0; width: min(900px, 70vw); height: auto; max-width: none; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 30%); mask-image: linear-gradient(to right, transparent 0, #000 30%); }
+.mm-fog { z-index: 2; left: 0; bottom: -20px; width: 100%; height: 300px; object-fit: cover; opacity: .85; -webkit-mask-image: linear-gradient(transparent, #000 45%); mask-image: linear-gradient(transparent, #000 45%); }
+.mm .wrap { z-index: 3; }
+.mm-col { max-width: 560px; }
+.mm-logo { width: 100%; filter: drop-shadow(0 4px 8px rgba(0,0,0,.6)); }
+.mm-sub { font: 400 40px/1 "Black Chancery", serif; color: #f1df8a; text-shadow: 0 2px 0 #3a2a05, 0 0 12px rgba(0,0,0,.8); margin: 4px 0 18px 46%; white-space: nowrap; }
+.mm-board { position: relative; padding: 26px 30px 22px; background: url("img/gh/mm/wood.webp") center / 100% 100%; border-radius: 4px;
+  box-shadow: 0 12px 26px rgba(0,0,0,.6); color: #f6ead0; font: 400 16px/1.6 Georgia, "Times New Roman", serif; text-shadow: 0 1px 2px rgba(0,0,0,.9); }
+.mm-board p { margin: 0 0 12px; }
+.mm-shot { width: 100%; margin: 6px 0 12px; border: 3px solid #2a170a; box-shadow: 0 0 0 1px #8a6234; }
+.mm-credit { font: 400 20px/1.3 "Black Chancery", serif; color: #f1df8a; margin: 0 !important; }
+.mm-open { position: relative; display: inline-block; margin: 18px 0 0 -6px; width: 300px; max-width: 100%; }
+.mm-open img { width: 100%; filter: drop-shadow(0 2px 3px rgba(0,0,0,.8)); }
+.mm-open .hi { position: absolute; inset: 0; opacity: 0; transition: opacity .12s; }
+.mm-open:hover .hi, .mm-open:focus-visible .hi { opacity: 1; }
+@media (max-width: 880px) {
+  .mm { min-height: 0; padding-bottom: 300px; }
+  .mm-house { width: 125%; right: 0; opacity: .95; }
+  .mm-sub { margin-left: 30%; font-size: 32px; }
+  .mm-moon { width: 120px; left: auto; right: 6%; top: 20px; }
+}
+@media (max-width: 480px) { .mm-board { padding: 20px 18px 16px; } .mm-sub { margin-left: 14%; } }

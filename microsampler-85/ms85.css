@@ -125,3 +125,12 @@
 .ms .mold, .ms .lcd { min-width: 0; }
 .lcd { max-width: 100%; }
 .keys .key i { width: 96px; }
+
+/* 4b · the real one: dad's keyboard, as a flash photo print */
+.real-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 34px; align-items: center; }
+@media (max-width: 860px) { .real-grid { grid-template-columns: 1fr; gap: 18px; } }
+.real-print { position: relative; margin: 0; background: #f4f1ea; padding: 10px 10px 34px; transform: rotate(-1.2deg); box-shadow: 0 14px 30px rgba(0,0,0,.55); }
+.real-print img { width: 100%; filter: contrast(1.04); }
+.real-print .ds { position: absolute; right: 18px; bottom: 44px; font-family: var(--pixel); font-size: 22px; color: #ff9b2e; text-shadow: 0 0 6px rgba(255,120,0,.95); }
+.real-text p { color: #cfcfd4; margin: 10px 0 0; }
+.real-text .small { font-size: 14px; color: #8f8f96; }
