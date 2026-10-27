@@ -1,7 +1,8 @@
 /* Brownie Digital: four pixel guinea pigs walking along the top edge of the
    Microsampler section. Every so often the one at the back stops, turns to
    look at you, turns back, notices the others have gone on, panics and runs
-   to catch up, then falls back into step. Each pig gets three random coat
+   to catch up, then falls back into step. Sometimes the third one does it
+   instead, and the two stuck behind it stomp about, fuming. Each pig gets three random coat
    colours on every visit. Drawn on a small canvas, scaled up with no smoothing. */
 (function () {
   "use strict";
@@ -26,7 +27,7 @@
 
   function sprite(pig, pose, step) {
     var g = blank(), c = pig.coat, pat = pig.pattern;
-    var bob = (pose === "run" ? (step ? -1 : 0) : 0), shake = pose === "panic" ? (step ? 1 : -1) : 0;
+    var bob = (pose === "run" ? (step ? -1 : 0) : 0), shake = (pose === "panic" || pose === "angry") ? (step ? 1 : -1) : 0;
     var stretch = pose === "run" ? 1 : 0;
     var by = 8 + bob;                           // body centre row
     function coatAt(x) {                        // the coat pattern along the body
@@ -52,6 +53,7 @@
       set(g, Math.round(hx - 1), Math.round(hy - 3.2), PINK);                     // ear
       var ex = Math.round(hx + 1), ey = Math.round(hy - 0.6);
       if (pose === "panic") { set(g, ex, ey, EYE); set(g, ex, ey - 1, EYE); set(g, ex + 1, ey - 1, SHINE); }  // wide eye
+      else if (pose === "angry") { set(g, ex, ey, EYE); set(g, ex - 1, ey - 2, OUT); set(g, ex, ey - 1, OUT); set(g, ex + 1, ey - 1, OUT); }  // scowl
       else set(g, ex, ey, EYE);
       set(g, Math.round(hx + 3.4), Math.round(hy + 1), NOSE);
     }
@@ -60,6 +62,7 @@
     var a = step ? 1 : 0;
     if (pose === "run") { backF = step ? [2, 6] : [4, 8]; frontF = step ? [14, 17] : [11, 15]; fy = H - 1 + bob; }
     if (pose === "look" || pose === "stand") a = 0;
+    if (pose === "angry") { a = 0; fy = H - 1 - (step ? 1 : 0); }   // a foot stamped
     [backF[0] + a, backF[1] - a, frontF[0] - a, frontF[1] + a].forEach(function (fx) { set(g, fx + shake, fy, PINK); set(g, fx + shake, fy - 1, PINK); });   // two rows: they reach the body
     return outline(g);
   }
@@ -101,48 +104,62 @@
     }
     g.drawImage(s, Math.round(x), Math.round(y), W * px, H * px);
   }
-  function mark(text, x, y) {             // a little pixel "!" or "?" above a head
-    var dots = text === "!" ? [[0, 0], [0, 1], [0, 2], [0, 4]] : [[0, 0], [1, 0], [2, 1], [1, 2], [1, 4]];
+  function mark(text, x, y) {             // a little pixel "!", "?" or cross anger vein above a head
+    var dots = text === "!" ? [[0, 0], [0, 1], [0, 2], [0, 4]]
+      : text === "#" ? [[1, 0], [3, 0], [0, 1], [1, 1], [3, 1], [4, 1], [0, 3], [1, 3], [3, 3], [4, 3], [1, 4], [3, 4]]
+      : [[0, 0], [1, 0], [2, 1], [1, 2], [1, 4]];
     g.fillStyle = OUT;                    // a dark edge so it reads on the brown
     dots.forEach(function (d) { g.fillRect(Math.round(x + d[0] * px - px * 0.5), Math.round(y + d[1] * px - px * 0.5), px * 2, px * 2); });
-    g.fillStyle = "#ffe970";
+    g.fillStyle = text === "#" ? "#ff3b2f" : "#ffe970";
     dots.forEach(function (d) { g.fillRect(Math.round(x + d[0] * px), Math.round(y + d[1] * px), px, px); });
   }
 
-  // walking: everyone shares one distance; the back pig (index 0) can fall behind
-  var SPEED = 26, STEP = 9;     // css px per second, px per foot swap
-  var dist = 0, lag = 0, state = "walk", t = 0, nextStop = 6 + Math.random() * 8;
+  // walking: everyone shares one distance; a pig doing its routine falls behind
+  // (usually the back one; sometimes the third, and then the two behind it
+  // bump into it, stomp and fume until it gets going again)
+  var SPEED = 26, STEP = 9, CLOSE = 0.72;     // css px per second, px per foot swap, how close a blocked pig bunches up
+  var dist = 0, lag = [0, 0, 0, 0], who = Math.random() < 0.35 ? 2 : 0, state = "walk", t = 0, nextStop = 6 + Math.random() * 8;
   function spacing() { return (W + 4) * px; }
+  function anyLag() { return lag[0] > 0 || lag[1] > 0 || lag[2] > 0; }
 
   function frame(dt) {
     dist += SPEED * dt;
     t += dt;
-    var span = cssW + spacing() * 4.2;          // back on screen soon after leaving
-    var lead = (dist % span) - spacing();                    // the front pig's left edge
-    var backX = lead - 3 * spacing() - lag;
-    // the back pig's routine, only while it is on screen
-    if (state === "walk" && t > nextStop && backX > cssW * 0.12 && lead < cssW * 0.85) { state = "stop"; t = 0; }
-    if (state === "stop") { lag += SPEED * dt; if (t > 0.35) { state = "look"; t = 0; } }
-    else if (state === "look") { lag += SPEED * dt; if (t > 1.3) { state = "turn"; t = 0; } }
-    else if (state === "turn") { lag += SPEED * dt; if (t > 0.5) { state = "panic"; t = 0; } }
-    else if (state === "panic") { lag += SPEED * dt; if (t > 0.6) { state = "run"; t = 0; } }
-    else if (state === "run") { lag -= SPEED * 2.6 * dt; if (lag <= 0) { lag = 0; state = "walk"; t = 0; nextStop = 9 + Math.random() * 12; } }
-    if (lead > cssW + spacing() * 0.5 && lag > 0 && state !== "run") { state = "run"; }   // never get left behind for good
+    var sp = spacing(), span = cssW + sp * 4.2;      // back on screen soon after leaving
+    var lead = (dist % span) - sp;                   // the front pig's left edge
+    var whoX = lead - (3 - who) * sp - lag[who];
+    // the routine, only while that pig is on screen
+    if (state === "walk" && t > nextStop && whoX > cssW * 0.12 && lead < cssW * 0.85 && lead - 3 * sp > cssW * 0.02) { state = "stop"; t = 0; }
+    if (state === "stop") { lag[who] += SPEED * dt; if (t > 0.35) { state = "look"; t = 0; } }
+    else if (state === "look") { lag[who] += SPEED * dt; if (t > 1.3) { state = "turn"; t = 0; } }
+    else if (state === "turn") { lag[who] += SPEED * dt; if (t > 0.5) { state = "panic"; t = 0; } }
+    else if (state === "panic") { lag[who] += SPEED * dt; if (t > 0.6) { state = "run"; t = 0; } }
+    else if (state === "run") {
+      for (var r = 0; r <= who; r++) lag[r] = Math.max(0, lag[r] - SPEED * 2.6 * dt);
+      if (!anyLag()) { state = "walk"; t = 0; who = Math.random() < 0.35 ? 2 : 0; nextStop = 9 + Math.random() * 12; }
+    }
+    // the ones behind can't walk through it: they close up and wait
+    for (var b = who - 1; b >= 0; b--) lag[b] = Math.max(lag[b], lag[b + 1] - sp * (1 - CLOSE));
+    if (lead > cssW + sp * 0.5 && anyLag() && state !== "run") { state = "run"; t = 0; }   // never get left behind for good
     g.clearRect(0, 0, cssW, cssH);
     var y = cssH - H * px, step = Math.floor(dist / STEP) % 2;
     for (var i = 3; i >= 0; i--) {
-      var p = pigs[i], x = lead - (3 - i) * spacing(), pose = "walk", st = step;
-      if (i === 0) {
-        x -= lag;
+      var p = pigs[i], x = lead - (3 - i) * sp - lag[i], pose = "walk", st = step, cross = false;
+      if (i === who) {
         if (state === "stop" || state === "turn") { pose = "stand"; st = 0; }
         else if (state === "look") { pose = "look"; st = 0; }
         else if (state === "panic") { pose = "panic"; st = Math.floor(t * 14) % 2; }
         else if (state === "run") { pose = "run"; st = Math.floor(t * 12) % 2; }
+      } else if (i < who && lag[i] > 0) {
+        cross = true;
+        if (state === "run") { pose = "run"; st = Math.floor(t * 12 + i) % 2; }
+        else if (lag[i] > 1) { pose = "angry"; st = Math.floor(t * 9 + i) % 2; }   // stuck: stomping
       }
       if (x < -W * px || x > cssW) continue;
       draw(p, pose, st, x, y);
-      if (i === 0 && state === "panic") { mark("!", x + 15 * px, y - 7 * px); mark("!", x + 17 * px, y - 7 * px); }
-      if (i === 0 && state === "turn" && t > 0.25) mark("?", x + 15 * px, y - 7 * px);
+      if (i === who && state === "panic") { mark("!", x + 15 * px, y - 7 * px); mark("!", x + 17 * px, y - 7 * px); }
+      if (i === who && state === "turn" && t > 0.25) mark("?", x + 15 * px, y - 7 * px);
+      if (cross && lag[i] > 1) mark("#", x + 13 * px, y - 7 * px - (Math.floor(t * 4 + i) % 2) * px);
     }
   }
 
