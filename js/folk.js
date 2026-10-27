@@ -49,6 +49,7 @@
   host.appendChild(layer);
 
   var actors = [], zones = [], loaded = false, running = false, lastW = 0;
+  var SC = 1;   // villager size: bigger when the gutters beside the text are wide
   var rand = function (a, b) { return a + Math.random() * (b - a); };
   var pick = function (a) { return a[Math.floor(Math.random() * a.length)]; };
 
@@ -77,13 +78,14 @@
   }
   function place(a) {
     var s = S[a.sprite];
-    a.el.style.transform = "translate(" + Math.round(a.x - s[3]) + "px," + Math.round(a.y - s[4] - (a.lift || 0)) + "px)" + (a.flip ? " scaleX(-1)" : "");
+    a.el.style.transform = "translate(" + Math.round(a.x - s[3]) + "px," + Math.round(a.y - s[4] - (a.lift || 0)) + "px) scale(" + (a.flip ? -SC : SC) + "," + SC + ")";
     a.el.style.zIndex = Math.round(a.y) + (a.lift ? 5000 : 0);
     if (a.prop) placeProp(a);
   }
   function placeProp(a) {
     var p = a.prop, s = S[p.name];
-    p.el.style.transform = "translate(" + Math.round(a.x + p.dx - s[3]) + "px," + Math.round(a.y + p.dy - s[4] - (a.lift || 0)) + "px)";
+    p.el.style.transform = "translate(" + Math.round(a.x + p.dx * SC - s[3]) + "px," + Math.round(a.y + p.dy * SC - s[4] - (a.lift || 0)) + "px) scale(" + SC + ")";
+    p.el.style.transformOrigin = s[3] + "px " + s[4] + "px";
     p.el.style.zIndex = Math.round(a.y + p.dy) + (a.lift ? 5000 : 0);
   }
   function staticSprite(name, x, y) {
@@ -91,7 +93,8 @@
     el.style.width = s[0] + "px"; el.style.height = s[1] + "px";
     el.dataset.src = DIR + name + ".webp";
     if (loaded) el.style.backgroundImage = "url(" + el.dataset.src + ")";
-    el.style.transform = "translate(" + Math.round(x - s[3]) + "px," + Math.round(y - s[4]) + "px)";
+    el.style.transform = "translate(" + Math.round(x - s[3]) + "px," + Math.round(y - s[4]) + "px) scale(" + SC + ")";
+    el.style.transformOrigin = s[3] + "px " + s[4] + "px";
     el.style.zIndex = Math.round(y);
     return el;
   }
@@ -105,11 +108,12 @@
     var left = wrap.offsetLeft + 16, right = wrap.offsetLeft + wrap.offsetWidth - 16;
     // y0..y1 is where feet can go
     var z = [];
+    SC = left >= 250 ? 1.5 : left >= 190 ? 1.25 : 1;
     if (left >= 136) {
       z.push({ x0: 14, x1: left - 18, y0: 150, y1: bottom, kind: "side" });
       z.push({ x0: right + 18, x1: W - 14, y0: 150, y1: bottom, kind: "side" });
     }
-    z.push({ x0: 20, x1: W - 20, y0: bottom + 105, y1: H - 12, kind: "lane" });
+    if (H - 12 - (bottom + 105) > 30) z.push({ x0: 20, x1: W - 20, y0: bottom + 105, y1: H - 12, kind: "lane" });
     return z;
   }
   function slots(z) {
@@ -117,7 +121,7 @@
     var out = [];
     if (z.kind === "side") {
       var cx = (z.x0 + z.x1) / 2;
-      for (var y = z.y0 + 10; y < z.y1 - 10; y += 150) out.push({ x: cx + rand(-20, 20) * (z.x1 - z.x0 > 200 ? 1 : 0.3), y: y + rand(-15, 15), z: z });
+      for (var y = z.y0 + 10; y < z.y1 - 10; y += 150 * SC) out.push({ x: cx + rand(-20, 20) * (z.x1 - z.x0 > 200 ? 1 : 0.3), y: y + rand(-15, 15), z: z });
     } else {
       var rows = z.y1 - z.y0 > 80 ? 2 : 1;
       for (var r = 0; r < rows; r++) {
@@ -131,6 +135,7 @@
   function build() {
     layer.innerHTML = ""; actors = [];
     zones = measure();
+    if (!zones.length) return;
     var all = [];
     // interleave the zones' spots so the first stations spread out across the section
     var lists = zones.map(slots), i = 0, more = true;
@@ -164,7 +169,7 @@
     var spots = actors.filter(function (o) { return !o.walker && o.zone === a.zone && o.prop; });
     var z = a.zone;
     if (spots.length && Math.random() < 0.7) {
-      var o = pick(spots); a.tx = o.x + o.prop.dx + (o.prop.dx > 0 ? 40 : -40); a.ty = o.y + o.prop.dy + rand(6, 16);
+      var o = pick(spots); a.tx = o.x + (o.prop.dx + (o.prop.dx > 0 ? 40 : -40)) * SC; a.ty = o.y + (o.prop.dy + rand(6, 16)) * SC;
     } else { a.tx = rand(z.x0 + 30, z.x1 - 30); a.ty = rand(z.y0, z.y1); }
     a.tx = Math.max(z.x0 + 20, Math.min(z.x1 - 20, a.tx)); a.ty = Math.max(z.y0, Math.min(z.y1, a.ty));
   }
@@ -184,7 +189,7 @@
     bubble.classList.remove("on"); void bubble.offsetWidth;
     var s = S[a.sprite], bw = bubble.offsetWidth, W = host.offsetWidth;
     var x = Math.max(6, Math.min(W - bw - 6, a.x - bw / 2));
-    bubble.style.left = x + "px"; bubble.style.top = (a.y - s[4] - bubble.offsetHeight - 8) + "px";
+    bubble.style.left = x + "px"; bubble.style.top = (a.y - s[4] * SC - bubble.offsetHeight - 8) + "px";
     bubble.style.setProperty("--tail", Math.max(14, Math.min(bw - 14, a.x - x)) + "px");
     bubble.classList.add("on");
     clearTimeout(bubbleTimer); bubbleTimer = setTimeout(function () { bubble.classList.remove("on"); }, 2400);
@@ -208,7 +213,7 @@
     a.el.addEventListener("pointermove", function (e) {
       if (e.pointerId !== id) return;
       var dx = e.clientX - sx, dy = e.clientY - sy;
-      if (!dragging && dx * dx + dy * dy > 25) { dragging = true; a.lift = 14; a.el.classList.add("held"); if (a.prop) a.prop.el.classList.add("held"); }
+      if (!dragging && dx * dx + dy * dy > 25) { dragging = true; a.lift = 14 * SC; a.el.classList.add("held"); if (a.prop) a.prop.el.classList.add("held"); }
       if (dragging) {
         a.x = Math.max(10, Math.min(host.offsetWidth - 10, ox + dx));
         a.y = Math.max(40, Math.min(host.offsetHeight - 6, oy + dy));
@@ -249,7 +254,7 @@
           if (d < 3) { a.mode = "stop"; a.until = now + rand(900, 2600); target(a); }
           else {
             facing(a, dx, dy);
-            var st = Math.min(d, a.speed * dt); a.x += dx / d * st; a.y += dy / d * st; moving = true;
+            var st = Math.min(d, a.speed * SC * dt); a.x += dx / d * st; a.y += dy / d * st; moving = true;
           }
         }
       } else if (a.mode === "rest" && now > a.until) { a.mode = "work"; setSprite(a, a.def.work); }

@@ -335,8 +335,8 @@ html.stone-mode { filter: invert(1) hue-rotate(180deg); }
 
 /* Rule the Kingdom: the city as the ground, the game's own dialog boxes on top */
 .rtk { position: relative; padding: 56px 0 64px; overflow: hidden; isolation: isolate; -webkit-font-smoothing: antialiased;
-  background: url("img/gh/rtk/city.webp") center / cover; }
-.rtk::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 50% 30%, rgba(20,40,10,.15), rgba(15,25,5,.65)); }
+  background: #84922a url("img/gh/rtk/grass.webp") 0 0 / 256px repeat; }
+.rtk::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 50% 40%, rgba(20,40,10,0), rgba(15,25,5,.35)); }
 .rtk .wrap { max-width: 860px; text-align: center; }
 .rtk-logo { width: min(340px, 72%); margin: 8px auto 26px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.45)); }
 .rtk-dlg { position: relative; margin: 0 auto 16px; max-width: 680px; padding: 16px 26px 14px; text-align: center;
@@ -358,7 +358,6 @@ html.stone-mode { filter: invert(1) hue-rotate(180deg); }
   text-shadow: 0 2px 0 #7a4200, 0 0 2px #7a4200; transition: transform .1s; }
 .rtk-btn:hover { transform: translateY(-2px); }
 /* the villagers: game sprites walking and working on the grass around the text */
-.rtk { padding-bottom: 200px; }
 .rtk .wrap { z-index: 1; }
 .rtk-folk { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
 .rtk-guy, .rtk-prop { position: absolute; left: 0; top: 0; background-repeat: no-repeat; will-change: transform; }
@@ -372,7 +371,6 @@ html.stone-mode { filter: invert(1) hue-rotate(180deg); }
   background: #f1e3c4; border: solid #c79a4e; border-width: 0 2px 2px 0; transform: rotate(45deg); }
 .rtk-say.on { opacity: 1; transform: none; }
 @media (max-width: 680px) {
-  .rtk { padding-bottom: 260px; }
   .rtk-row { grid-template-columns: 1fr; }
   .rtk-dlg.has-face { padding: 64px 18px 14px; text-align: center; margin-top: 60px; }
   .rtk-face { left: 50%; top: -52px; transform: translateX(-50%); width: 96px; height: 96px; }
