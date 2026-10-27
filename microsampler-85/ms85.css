@@ -151,6 +151,49 @@
 .env-grid .pl { stroke: var(--blue); stroke-dasharray: 3 2; }
 .env-grid .ku { stroke: #ffffff30; stroke-dasharray: 2 3; vector-effect: non-scaling-stroke; }
 .env-grid figcaption { font-family: var(--pixel); font-size: 15px; color: var(--lcd); margin-top: 2px; }
+/* 4d · the little details */
+.tests-new { padding: 22px 20px 20px; margin-top: 16px; }
+.tests-new > p { font-size: 15px; margin: 10px 0 12px; max-width: 62em; }
+.tests-new .small { font-size: 14px; color: #8f8f96; margin: 16px 0 0; }
+.new-key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--pixel); font-size: 16px; color: #d6d6dc; margin-bottom: 14px; }
+.new-key i { display: inline-block; width: 22px; height: 0; border-top: 3px solid var(--lcd); vertical-align: middle; margin-right: 8px; }
+.new-key i.pl { border-top: 3px dashed var(--blue); } .new-key i.ol { border-top: 2px solid #ffffff55; }
+.new-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 860px) { .new-grid { grid-template-columns: 1fr; } }
+.new-card { background: #0000002e; border: 2px solid #050505; border-radius: 6px; padding: 14px 14px 12px; }
+.new-card h3 { margin: 0 0 6px; font-family: var(--pixel); font-weight: 400; font-size: 20px; color: var(--lcd); }
+.new-card p { font-size: 14.5px; margin: 0 0 12px; color: #cfcfd4; }
+.new-figs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.new-figs.one { grid-template-columns: 1fr; }
+@media (max-width: 480px) { .new-figs { grid-template-columns: 1fr; } }
+.new-figs figure { margin: 0; background: var(--lcd-bg); border: 2px solid #050505; border-radius: 4px; padding: 6px 6px 4px; }
+.new-figs svg { display: block; width: 100%; height: 72px; overflow: visible; }
+.new-figs polyline { fill: none; stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.new-figs .hw { stroke: var(--lcd); } .new-figs .pl { stroke: var(--blue); stroke-dasharray: 3 2; } .new-figs .ol { stroke: #ffffff45; stroke-width: 1.2; }
+.new-figs rect.hw { fill: var(--lcd); } .new-figs rect.pl { fill: var(--blue); } .new-figs rect.ol { fill: #ffffff40; }
+.new-figs .ku { stroke: #ffffff25; stroke-dasharray: 2 3; vector-effect: non-scaling-stroke; }
+.new-figs figcaption { font-family: var(--pixel); font-size: 14px; color: var(--lcd); margin-top: 3px; }
+/* 4d · the 8-bit machine, tone by tone */
+.play-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+@media (max-width: 860px) { .play-row { grid-template-columns: 1fr; } }
+.play-card { padding: 22px 20px 20px; }
+.play-card > p { font-size: 15px; margin: 10px 0 12px; }
+.bit-lcd, .harm-lcd { padding: 8px 10px 6px; }
+.bit-lcd canvas { display: block; width: 100%; height: auto; aspect-ratio: 600 / 190; image-rendering: pixelated; }
+.harm-lcd svg { display: block; width: 100%; height: 150px; }
+.harm-lcd rect.hw { fill: var(--lcd); } .harm-lcd rect.pl { fill: none; stroke: var(--blue); stroke-width: 2; stroke-dasharray: 3 2; vector-effect: non-scaling-stroke; }
+.bit-read { display: flex; justify-content: space-between; gap: 10px; font-size: 16px; margin-top: 4px; }
+.bit-ctrl { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 14px; }
+.bit-slide { display: flex; align-items: center; gap: 10px; font-family: var(--pixel); font-size: 16px; color: #d6d6dc; flex: 1 1 200px; }
+.bit-slide input { flex: 1; accent-color: var(--yellow); }
+.bit-src { display: flex; flex-wrap: wrap; gap: 6px; }
+.harm-pick { margin-top: 14px; }
+.bit-src button { font-family: var(--pixel); font-size: 15px; color: #d6d6dc; background: linear-gradient(#8a8a90, #6c6c72); border: 0; border-radius: 3px; padding: 6px 10px 5px; box-shadow: 0 3px 0 #2f2f33; cursor: pointer; }
+.bit-src button.on { color: #1c1c1e; background: linear-gradient(#ffe970, var(--yellow)); box-shadow: 0 3px 0 #8a770c; }
+.bit-src button:active { transform: translateY(2px); box-shadow: 0 1px 0 #2f2f33; }
+.bit-key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--pixel); font-size: 15px; color: #d6d6dc; margin-top: 12px; }
+.bit-key i { display: inline-block; width: 22px; height: 0; vertical-align: middle; margin-right: 8px; border-top: 3px solid var(--lcd); }
+.bit-key i.in { border-top: 2px solid #ffffff60; } .bit-key i.pl { border-top: 3px dashed var(--blue); }
 .tests-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
 @media (max-width: 760px) { .tests-row { grid-template-columns: 1fr; } }
 .tests-row .mold { padding: 22px 20px 20px; }
