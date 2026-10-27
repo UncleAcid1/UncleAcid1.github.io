@@ -70,8 +70,10 @@ section { position: relative; }
   background:
     linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0) 30%, rgba(0,0,0,.25)),
     var(--grain), var(--plastic);
-  color: #e9e9ec; padding: 0; border-block: 2px solid #000;
+  color: #e9e9ec; padding: 0; border-block: 2px solid #000; position: relative;
 }
+/* the guinea pigs on the section's top edge (js/pigs.js) */
+.plastic .pigs { position: absolute; left: 0; z-index: 5; pointer-events: none; image-rendering: pixelated; }
 .plastic-inner { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr); gap: 0; align-items: stretch; }
 @media (max-width: 880px) { .plastic-inner { grid-template-columns: 1fr; } }
 .plastic .panel { position: relative; padding: 56px 36px; border-right: 2px solid #0b0b0c; box-shadow: inset -1px 0 0 #ffffff12; }
