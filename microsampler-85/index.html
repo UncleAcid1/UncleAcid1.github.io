@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css?v=15">
-<link rel="stylesheet" href="ms85.css?v=8">
+<link rel="stylesheet" href="ms85.css?v=9">
 <meta property="og:title" content="Microsampler 85' by Brownie Digital">
 <meta property="og:description" content="An 8-bit vintage sampler for your Mac: crunchy 9 kHz sampling, circuit bends, a rhythm box. $10.">
 <meta property="og:image" content="https://uncleacid1.github.io/img/window-black-grille.jpg">
@@ -52,7 +52,7 @@
       </div>
       <div class="mold screen-wrap">
         <div class="flyer o price">$10!<small>one time</small></div>
-        <img id="hero-shot" src="../img/window-black-bends.jpg" alt="Microsampler 85' with the black skin and the circuit bend settings open" width="1916" height="710">
+        <img id="hero-shot" src="../img/window-black-bends.jpg?v=2" alt="Microsampler 85' with the black skin, the circuit bend settings and the Moog filter open" width="2319" height="710">
         <div class="skins" role="group" aria-label="Skin">skin
           <button type="button" data-skin="black" aria-pressed="true" aria-label="Black skin"></button>
           <button type="button" data-skin="pink" aria-pressed="false" aria-label="Pink skin"></button>
@@ -64,9 +64,10 @@
   <!-- 4 · screens -->
   <section style="padding-top: 0">
     <div class="wrap screens">
-      <figure><img src="../img/bay-pink-sample.jpg" alt="The sample screen" width="520" height="854" loading="lazy"><figcaption>SAMPLE</figcaption></figure>
-      <figure><img src="../img/bay-black-drums.jpg" alt="The drum editor" width="520" height="854" loading="lazy"><figcaption>DRUMS</figcaption></figure>
-      <figure><img src="../img/bay-pink-lfo.jpg" alt="The two LFOs" width="520" height="854" loading="lazy"><figcaption>LFO</figcaption></figure>
+      <figure><img src="../img/bay-pink-sample.jpg?v=2" alt="The sample screen" width="520" height="840" loading="lazy"><figcaption>SAMPLE</figcaption></figure>
+      <figure><img src="../img/bay-black-drums.jpg?v=2" alt="The drum editor" width="520" height="840" loading="lazy"><figcaption>DRUMS</figcaption></figure>
+      <figure><img src="../img/bay-pink-lfo.jpg?v=2" alt="The two LFOs" width="520" height="840" loading="lazy"><figcaption>LFO</figcaption></figure>
+      <figure><img src="../img/bay-black-filter.jpg" alt="The filter bay: a JP-8000 style filter with blend and a tempo-synced LFO" width="520" height="840" loading="lazy"><figcaption>FILTER</figcaption></figure>
     </div>
   </section>
 
@@ -202,6 +203,23 @@
         <div class="lcd hear-lcd"><div class="hear-row" data-t="piano"><span class="hear-name">piano</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="brass"><span class="hear-name">brass</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="trumpet"><span class="hear-name">trumpet</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="flute"><span class="hear-name">flute</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="human-voice"><span class="hear-name">human voice</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="synth-drums"><span class="hear-name">synth drums</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="pipe-organ"><span class="hear-name">pipe organ</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="jazz-organ"><span class="hear-name">jazz organ</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div></div>
       </div>
 
+      <!-- the sampler, heard: my orchestra hit sampled by the original and by the plug-in (Oct 26 take; plug-in render Oct 27) -->
+      <div class="mold orch">
+        <div class="lbl">sampled: an orchestra hit <span class="mini-keys"><span class="y"></span><span class="b"></span></span></div>
+        <p>The tones are one thing; the sampler is the point. I fed my orchestra hit into the real keyboard, let it sample it, and recorded it playing back on low F, A and top C. Then Microsampler 85' sampled the same file and played the same three notes. Matched in level, nothing else done to either. The original's take has its own background hiss; in the plug-in that's a switch, and it was off.</p>
+        <div class="lcd orch-lcd">
+          <div class="orch-btns">
+            <button type="button" class="hear-btn orch-btn" data-f="hear/orch-input.mp3" data-w="in">the sound going in</button>
+            <button type="button" class="hear-btn orch-btn" data-f="hear/orch-original.mp3" data-w="a">original keyboard</button>
+            <button type="button" class="hear-btn orch-btn" data-f="hear/orch-ms85.mp3" data-w="b">microsampler 85'</button>
+          </div>
+          <figure class="orch-fig"><svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="62" x2="300" y2="62" class="ku"/><polyline class="hw" points="0.0,16.0 1.6,15.1 3.3,15.4 4.9,14.4 6.6,14.0 8.2,14.6 9.8,15.1 11.5,15.3 13.1,14.7 14.8,15.3 16.4,15.3 18.0,13.9 19.7,14.1 21.3,13.8 23.0,13.8 24.6,13.3 26.2,13.9 27.9,13.4 29.5,13.4 31.1,13.3 32.8,14.1 34.4,15.4 36.1,15.8 37.7,15.7 39.3,16.2 41.0,16.2 42.6,15.8 44.3,16.8 45.9,16.2 47.5,18.6 49.2,19.5 50.8,18.1 52.5,18.7 54.1,19.9 55.7,19.7 57.4,21.2 59.0,18.4 60.7,19.3 62.3,19.3 63.9,20.1 65.6,21.3 67.2,22.2 68.9,21.8 70.5,18.1 72.1,19.6 73.8,19.3 75.4,19.5 77.0,21.4 78.7,21.6 80.3,20.7 82.0,21.5 83.6,23.4 85.2,21.4 86.9,21.9 88.5,24.2 90.2,23.9 91.8,23.3 93.4,21.3 95.1,22.4 96.7,24.4 98.4,23.5 100.0,24.8 101.6,26.6 103.3,23.2 104.9,24.8 106.6,25.0 108.2,25.3 109.8,25.4 111.5,27.7 113.1,26.0 114.8,26.9 116.4,24.9 118.0,26.7 119.7,24.9 121.3,26.7 123.0,28.1 124.6,27.6 126.2,25.2 127.9,25.3 129.5,29.1 131.1,29.7 132.8,28.7 134.4,27.0 136.1,27.0 137.7,29.2 139.3,28.1 141.0,31.4 142.6,30.4 144.3,31.4 145.9,30.0 147.5,29.9 149.2,31.1 150.8,30.3 152.5,29.6 154.1,27.9 155.7,28.8 157.4,32.8 159.0,30.5 160.7,34.7 162.3,45.1 163.9,61.1 165.6,62.0 167.2,62.0 168.9,62.0 170.5,62.0 172.1,62.0 173.8,62.0 175.4,62.0 177.0,62.0 178.7,62.0 180.3,62.0 182.0,62.0 183.6,62.0 185.2,62.0 186.9,62.0 188.5,62.0 190.2,62.0 191.8,20.9 193.4,17.8 195.1,16.9 196.7,17.9 198.4,18.0 200.0,16.4 201.6,15.3 203.3,14.9 204.9,16.2 206.6,17.9 208.2,17.9 209.8,18.4 211.5,21.3 213.1,21.3 214.8,22.1 216.4,21.4 218.0,24.0 219.7,24.0 221.3,24.2 223.0,25.5 224.6,25.7 226.2,25.8 227.9,27.0 229.5,26.1 231.1,27.7 232.8,28.6 234.4,28.8 236.1,29.6 237.7,29.2 239.3,29.0 241.0,30.9 242.6,29.7 244.3,32.9 245.9,31.2 247.5,33.0 249.2,34.8 250.8,33.7 252.5,33.6 254.1,32.8 255.7,36.3 257.4,62.0 259.0,62.0 260.7,62.0 262.3,62.0 263.9,62.0 265.6,62.0 267.2,62.0 268.9,20.5 270.5,21.9 272.1,20.5 273.8,20.4 275.4,21.3 277.0,24.5 278.7,26.5 280.3,31.8 282.0,35.1 283.6,34.4 285.2,36.2 286.9,36.9 288.5,37.0 290.2,39.6 291.8,41.0 293.4,41.6 295.1,42.7 296.7,62.0 298.4,62.0 300.0,62.0"/><polyline class="pl" points="0.0,13.2 1.6,13.4 3.3,13.9 4.9,13.4 6.6,13.6 8.2,14.0 9.8,13.7 11.5,14.6 13.1,13.9 14.8,14.4 16.4,14.1 18.0,13.8 19.7,13.9 21.3,12.9 23.0,13.0 24.6,12.6 26.2,13.0 27.9,13.4 29.5,13.1 31.1,13.2 32.8,14.3 34.4,15.7 36.1,16.3 37.7,16.6 39.3,16.9 41.0,16.7 42.6,16.4 44.3,16.3 45.9,16.5 47.5,20.3 49.2,20.9 50.8,19.8 52.5,20.5 54.1,22.1 55.7,22.0 57.4,23.4 59.0,20.4 60.7,20.6 62.3,21.3 63.9,21.5 65.6,23.0 67.2,24.0 68.9,23.7 70.5,19.7 72.1,21.4 73.8,21.2 75.4,21.2 77.0,23.3 78.7,23.7 80.3,22.7 82.0,23.3 83.6,25.4 85.2,23.4 86.9,23.7 88.5,26.1 90.2,25.9 91.8,25.4 93.4,23.3 95.1,24.4 96.7,26.5 98.4,25.6 100.0,26.8 101.6,28.8 103.3,25.4 104.9,26.7 106.6,27.1 108.2,27.3 109.8,27.3 111.5,29.6 113.1,28.1 114.8,28.9 116.4,27.0 118.0,28.6 119.7,27.0 121.3,28.8 123.0,30.1 124.6,29.7 126.2,27.4 127.9,27.4 129.5,31.4 131.1,31.6 132.8,30.9 134.4,29.2 136.1,29.2 137.7,31.4 139.3,30.4 141.0,33.5 142.6,32.6 144.3,33.5 145.9,32.3 147.5,32.2 149.2,33.3 150.8,32.8 152.5,31.5 154.1,30.0 155.7,31.0 157.4,35.0 159.0,32.6 160.7,36.7 162.3,47.8 163.9,62.0 165.6,62.0 167.2,62.0 168.9,62.0 170.5,62.0 172.1,60.3 173.8,62.0 175.4,62.0 177.0,62.0 178.7,62.0 180.3,62.0 182.0,62.0 183.6,62.0 185.2,62.0 186.9,62.0 188.5,62.0 190.2,62.0 191.8,18.1 193.4,17.2 195.1,17.0 196.7,17.6 198.4,17.3 200.0,16.5 201.6,15.1 203.3,14.9 204.9,16.3 206.6,19.1 208.2,18.9 209.8,18.8 211.5,22.2 213.1,22.7 214.8,23.4 216.4,23.0 218.0,25.6 219.7,25.9 221.3,26.4 223.0,27.7 224.6,28.0 226.2,28.0 227.9,29.1 229.5,28.3 231.1,30.0 232.8,31.0 234.4,31.1 236.1,31.8 237.7,31.4 239.3,31.1 241.0,33.2 242.6,32.2 244.3,35.1 245.9,33.6 247.5,35.5 249.2,37.1 250.8,36.1 252.5,36.0 254.1,35.2 255.7,38.7 257.4,62.0 259.0,62.0 260.7,62.0 262.3,62.0 263.9,62.0 265.6,62.0 267.2,62.0 268.9,18.5 270.5,22.1 272.1,20.8 273.8,21.0 275.4,22.3 277.0,24.2 278.7,26.6 280.3,33.6 282.0,37.5 283.6,36.6 285.2,38.6 286.9,39.2 288.5,39.6 290.2,42.0 291.8,43.6 293.4,43.9 295.1,45.1 296.7,62.0 298.4,62.0 300.0,62.0"/></svg>
+            <div class="orch-notes" aria-hidden="true"><span style="left: 0">low F</span><span style="left: 63.9%">A</span><span style="left: 89.3%">top C</span></div>
+            <figcaption>level over the take, the three notes in a row</figcaption></figure>
+          <div class="new-key"><span><i class="hw"></i>the original</span><span><i class="pl"></i>microsampler 85'</span></div>
+        </div>
+      </div>
+
       <div class="tests-row">
         <div class="mold">
           <div class="lbl">the built-in tones</div>
@@ -252,7 +270,8 @@
         <div class="mold"><div class="lbl">circuit bend <span class="knob red" style="--r: -60deg"></span></div><h3>clock bend, glitch, stutter</h3><p>The bend knob drags the clock two octaves down or one up. Glitch and stutter recreate the classic shorted-pin bends.</p></div>
         <div class="mold"><div class="lbl">lfo <span class="knob" style="--r: 80deg"></span></div><h3>two LFOs</h3><p>Seven shapes from sine to stepped random, free or synced, each able to move the bend, glitch and stutter.</p></div>
         <div class="mold wide"><div class="lbl">rhythm <span class="mini-keys"><span></span><span></span><span class="b"></span><span></span></span></div><h3>rhythm box + drum editor</h3><p>The original's 11 rhythms (disco to waltz), 8 extra patterns (boom bap, breakbeat, electro, dub, trip hop…) and a step editor for your own. Typed tempo, or follow your DAW.</p></div>
-        <div class="mold"><div class="lbl">filter <span class="knob" style="--r: -10deg"></span></div><h3>four filters</h3><p>The original playback filter, a brighter one, wide open (every step and alias comes through), or smooth.</p></div>
+        <div class="mold wide"><div class="lbl">filter bay <span class="knob red" style="--r: 50deg"></span></div><h3>moog, sem, jp-8000</h3><p>Three analogue filter models behind the sampler: the Moog ladder, the Oberheim SEM and the JP-8000. Each has drive, a blend knob to mix it with the dry sound, its own envelope, and an LFO that runs free or locks to your DAW's tempo.</p></div>
+        <div class="mold"><div class="lbl">filter <span class="knob" style="--r: -10deg"></span></div><h3>four output filters</h3><p>The original playback filter, a brighter one, wide open (every step and alias comes through), or smooth.</p></div>
         <div class="mold"><div class="lbl">live in <span class="mini-keys"><span class="y"></span></span></div><h3>the FX version</h3><p>A separate effect for audio tracks: run guitars, synths, drums or vocals through the 8-bit circuit live, with level and dry/wet.</p></div>
         <div class="mold"><div class="lbl">presets <span class="mini-keys"><span></span><span></span></span></div><h3>and the rest</h3><p>Built-in and user presets, mono / duo / 4 / 8 voices, chords, noise, two skins, computer-keyboard playing in the app.</p></div>
       </div>
@@ -336,6 +355,19 @@
 
 <script src="../js/site.js?v=7" defer></script>
 <script>
+// the orchestra hit: one clip at a time
+(function () {
+  var cur = null, curBtn = null;
+  function stop() { if (cur) { cur.pause(); cur.currentTime = 0; } if (curBtn) curBtn.classList.remove('on'); cur = curBtn = null; }
+  document.querySelectorAll('.orch-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var was = curBtn === btn; stop(); if (was) return;
+      cur = new Audio(btn.dataset.f); curBtn = btn; btn.classList.add('on');
+      cur.addEventListener('ended', function () { if (curBtn === btn) stop(); });
+      cur.play().catch(stop);
+    });
+  });
+})();
 // hear it: one clip at a time; blind mode shuffles which button is the original
 (function () {
   var rows = document.querySelectorAll('.hear-row'), blind = document.getElementById('hearBlind'), reveal = document.getElementById('hearReveal');
@@ -442,8 +474,8 @@
   // skin switch for the big screenshot
   (function () {
     var img = document.getElementById("hero-shot");
-    var shots = { black: ["../img/window-black-bends.jpg", "Microsampler 85' with the black skin and the circuit bend settings open"],
-                  pink: ["../img/window-pink-sample.jpg", "Microsampler 85' with the pink skin and the sample screen open"] };
+    var shots = { black: ["../img/window-black-bends.jpg?v=2", "Microsampler 85' with the black skin, the circuit bend settings and the Moog filter open"],
+                  pink: ["../img/window-pink-sample.jpg?v=2", "Microsampler 85' with the pink skin, the sample screen and the JP-8000 filter open"] };
     new Image().src = shots.pink[0];
     document.querySelectorAll(".skins button").forEach(function (b) {
       b.addEventListener("click", function () {

@@ -84,8 +84,8 @@
 .sec-head h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.3rem, 3vw, 2rem); color: #fff; margin: 0; line-height: 1.2; }
 
 /* 4 · screens */
-.screens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-@media (max-width: 760px) { .screens { grid-template-columns: repeat(2, 1fr); } .screens figure:last-child { display: none; } }
+.screens { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 760px) { .screens { grid-template-columns: repeat(2, 1fr); } }
 .screens figure { margin: 0; background: #0b0b0c; border: 2px solid #000; border-radius: 6px; padding: 10px; box-shadow: inset 0 0 0 1px #ffffff10; }
 .screens figcaption { font-family: var(--pixel); color: var(--lcd); font-size: 19px; margin-top: 8px; text-align: center; }
 
@@ -248,3 +248,18 @@
 .why-vis .cap i.pl { border-top: 3px dashed var(--blue); margin-left: 10px; }
 .why-vis .lbl { display: none; }
 @media (prefers-reduced-motion: reduce) { .why-vis .no { animation: none; } }
+
+/* 4e · sampled: the orchestra hit */
+.orch { padding: 22px 20px 20px; margin-top: 16px; }
+.orch > p { font-size: 15px; margin: 10px 0 12px; max-width: 62em; }
+.orch-lcd { padding: 14px; }
+.orch-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.orch-btn[data-w="in"] { background: linear-gradient(#e6e6ea, #b9b9c0); box-shadow: 0 3px 0 #5d5d63; }
+.orch-fig { margin: 0 0 10px; }
+.orch-fig svg { display: block; width: 100%; height: 110px; }
+.orch-fig polyline { fill: none; stroke-width: 1.8; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.orch-fig .hw { stroke: var(--lcd); } .orch-fig .pl { stroke: var(--blue); stroke-dasharray: 4 3; }
+.orch-fig .ku { stroke: #ffffff25; vector-effect: non-scaling-stroke; }
+.orch-notes { position: relative; height: 20px; font-family: var(--pixel); font-size: 15px; color: #d6d6dc; }
+.orch-notes span { position: absolute; top: 2px; white-space: nowrap; }
+.orch-fig figcaption { font-family: var(--pixel); font-size: 14px; color: var(--lcd); margin-top: 2px; }
