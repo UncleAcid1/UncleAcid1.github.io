@@ -194,6 +194,24 @@
 .bit-key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--pixel); font-size: 15px; color: #d6d6dc; margin-top: 12px; }
 .bit-key i { display: inline-block; width: 22px; height: 0; vertical-align: middle; margin-right: 8px; border-top: 3px solid var(--lcd); }
 .bit-key i.in { border-top: 2px solid #ffffff60; } .bit-key i.pl { border-top: 3px dashed var(--blue); }
+/* 4d · hear it */
+.hear { padding: 22px 20px 20px; margin-top: 16px; }
+.hear > p { font-size: 15px; margin: 10px 0 12px; max-width: 62em; }
+.hear-top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-bottom: 12px; }
+.hear-blind { font-family: var(--pixel); font-size: 16px; color: #d6d6dc; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.hear-blind input { accent-color: var(--yellow); width: 18px; height: 18px; }
+.hear-lcd { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 22px; padding: 12px 14px; }
+@media (max-width: 760px) { .hear-lcd { grid-template-columns: 1fr; } }
+.hear-row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 8px; }
+.hear-name { font-size: 19px; }
+.hear-ans { grid-column: 1 / -1; font-size: 15px; color: #fff; min-height: 0; }
+.hear-ans:empty { display: none; }
+.hear-btn, .hear-reveal { font-family: var(--pixel); font-size: 15px; color: #1c1c1e; background: linear-gradient(#ffe970, var(--yellow)); border: 0; border-radius: 3px; padding: 6px 10px 5px; box-shadow: 0 3px 0 #8a770c; cursor: pointer; min-width: 44px; }
+.hear-btn[data-w="b"] { background: linear-gradient(#7fd0f2, var(--blue)); box-shadow: 0 3px 0 #1d5f7d; }
+.hear.blind .hear-btn[data-w="b"] { background: linear-gradient(#ffe970, var(--yellow)); box-shadow: 0 3px 0 #8a770c; }
+.hear-btn.on { transform: translateY(2px); box-shadow: 0 1px 0 #2f2f33; filter: brightness(1.15); }
+.hear-btn.on::before { content: "\25B6  "; }
+.hear-reveal { background: linear-gradient(#8a8a90, #6c6c72); color: #fff; box-shadow: 0 3px 0 #2f2f33; }
 .tests-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
 @media (max-width: 760px) { .tests-row { grid-template-columns: 1fr; } }
 .tests-row .mold { padding: 22px 20px 20px; }

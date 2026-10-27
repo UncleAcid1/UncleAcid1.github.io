@@ -191,6 +191,17 @@
         </div>
       </div>
 
+      <!-- hear it: the A key of every built-in tone, the original against the plug-in -->
+      <div class="mold hear">
+        <div class="lbl">hear it <span class="mini-keys"><span class="y"></span><span class="y"></span></span></div>
+        <p>Every built-in tone on the same key, recorded off the original and then played by Microsampler 85'. Same note, same level, two seconds each. Headphones help.</p>
+        <div class="hear-top">
+          <label class="hear-blind"><input type="checkbox" id="hearBlind"> can you tell? hide which is which</label>
+          <button type="button" class="hear-reveal" id="hearReveal" hidden>reveal</button>
+        </div>
+        <div class="lcd hear-lcd"><div class="hear-row" data-t="piano"><span class="hear-name">piano</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="brass"><span class="hear-name">brass</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="trumpet"><span class="hear-name">trumpet</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="flute"><span class="hear-name">flute</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="human-voice"><span class="hear-name">human voice</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="synth-drums"><span class="hear-name">synth drums</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="pipe-organ"><span class="hear-name">pipe organ</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div><div class="hear-row" data-t="jazz-organ"><span class="hear-name">jazz organ</span><button type="button" class="hear-btn" data-w="a">original</button><button type="button" class="hear-btn" data-w="b">microsampler 85'</button><span class="hear-ans"></span></div></div>
+      </div>
+
       <div class="tests-row">
         <div class="mold">
           <div class="lbl">the built-in tones</div>
@@ -324,6 +335,40 @@
 </footer>
 
 <script src="../js/site.js?v=7" defer></script>
+<script>
+// hear it: one clip at a time; blind mode shuffles which button is the original
+(function () {
+  var rows = document.querySelectorAll('.hear-row'), blind = document.getElementById('hearBlind'), reveal = document.getElementById('hearReveal');
+  if (!rows.length) return;
+  var cur = null, curBtn = null;
+  function stop() { if (cur) { cur.pause(); cur.currentTime = 0; } if (curBtn) curBtn.classList.remove('on'); cur = curBtn = null; }
+  rows.forEach(function (r) {
+    var t = r.dataset.t, files = { a: 'hear/' + t + '-original.mp3', b: 'hear/' + t + '-ms85.mp3' };
+    r.swap = false;
+    r.querySelectorAll('.hear-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var was = curBtn === btn; stop(); if (was) return;
+        var which = btn.dataset.w; if (r.swap) which = which === 'a' ? 'b' : 'a';
+        cur = new Audio(files[which]); curBtn = btn; btn.classList.add('on');
+        cur.addEventListener('ended', function () { if (curBtn === btn) stop(); });
+        cur.play().catch(stop);
+      });
+    });
+  });
+  function label() {
+    rows.forEach(function (r) {
+      var b = r.querySelectorAll('.hear-btn');
+      if (blind.checked) { b[0].textContent = 'X'; b[1].textContent = 'Y'; } else { b[0].textContent = 'original'; b[1].textContent = "microsampler 85'"; r.swap = false; }
+      r.querySelector('.hear-ans').textContent = '';
+    });
+    reveal.hidden = !blind.checked;
+    document.querySelector('.mold.hear').classList.toggle('blind', blind.checked);
+  }
+  blind.addEventListener('change', function () { stop(); rows.forEach(function (r) { r.swap = blind.checked && Math.random() < 0.5; }); label(); });
+  reveal.addEventListener('click', function () { rows.forEach(function (r) { r.querySelector('.hear-ans').textContent = 'original = ' + (r.swap ? 'Y' : 'X'); }); });
+  label();
+})();
+</script>
 <script>
 // the 8-bit machine and tone by tone (ms85 page)
 (function () {
