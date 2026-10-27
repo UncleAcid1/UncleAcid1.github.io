@@ -102,33 +102,44 @@
   // ---------------------------------------------------------------- layout
   // Free ground: the gutters beside the text column (when there's room) and a
   // strip of grass under the button.
+  function rel(el) {   // an element's box inside the section
+    var r = el.getBoundingClientRect(), h = host.getBoundingClientRect();
+    return { l: r.left - h.left, r: r.right - h.left, t: r.top - h.top, b: r.bottom - h.top };
+  }
   function measure() {
     var H = host.offsetHeight, W = host.offsetWidth;
-    var last = wrap.lastElementChild, bottom = last.offsetTop + last.offsetHeight + wrap.offsetTop;
+    var last = rel(wrap.lastElementChild), bottom = last.b;
     var left = wrap.offsetLeft + 16, right = wrap.offsetLeft + wrap.offsetWidth - 16;
-    // y0..y1 is where feet can go
+    // rectangles of open grass; y0..y1 is where feet can go
     var z = [];
     SC = left >= 250 ? 1.5 : left >= 190 ? 1.25 : 1;
     if (left >= 136) {
-      z.push({ x0: 14, x1: left - 18, y0: 150, y1: bottom, kind: "side" });
-      z.push({ x0: right + 18, x1: W - 14, y0: 150, y1: bottom, kind: "side" });
+      z.push({ x0: 14, x1: left - 18, y0: 40 + 90 * SC, y1: bottom, kind: "side" });
+      z.push({ x0: right + 18, x1: W - 14, y0: 40 + 90 * SC, y1: bottom, kind: "side" });
+    }
+    // the grass either side of the logo, above the nameplate
+    var logo = host.querySelector(".rtk-logo"), plate = host.querySelector(".rtk-plaque");
+    if (logo && plate) {
+      var lg = rel(logo), pt = rel(plate).t - 6, y0 = 30 + 90 * SC;
+      if (pt - y0 > 40) {
+        if (lg.l - 30 - 14 > 110 * SC) z.push({ x0: 14, x1: lg.l - 30, y0: y0, y1: pt, kind: "top" });
+        if (W - 14 - lg.r - 30 > 110 * SC) z.push({ x0: lg.r + 30, x1: W - 14, y0: y0, y1: pt, kind: "top" });
+      }
     }
     if (H - 12 - (bottom + 105) > 30) z.push({ x0: 20, x1: W - 20, y0: bottom + 105, y1: H - 12, kind: "lane" });
     return z;
   }
-  function slots(z) {
-    // spots for stations: down the middle of a gutter, or along the lane
-    var out = [];
-    if (z.kind === "side") {
-      var cx = (z.x0 + z.x1) / 2;
-      for (var y = z.y0 + 10; y < z.y1 - 10; y += 150 * SC) out.push({ x: cx + rand(-20, 20) * (z.x1 - z.x0 > 200 ? 1 : 0.3), y: y + rand(-15, 15), z: z });
-    } else {
-      var rows = z.y1 - z.y0 > 80 ? 2 : 1;
-      for (var r = 0; r < rows; r++) {
-        var yy = rows === 1 ? (z.y0 + z.y1) / 2 : z.y0 + 6 + r * (z.y1 - z.y0 - 14);
-        var step = z.x1 - z.x0 < 700 ? 120 : 190;
-        for (var x = z.x0 + 60 + r * step / 2; x < z.x1 - 50; x += step) out.push({ x: x + rand(-15, 15), y: yy + rand(-8, 8), z: z });
-      }
+  // Scatter spots over all the open grass at random, keeping them apart, so
+  // the village doesn't line up in columns.
+  function scatter(z, want) {
+    var m = 48 * SC, gap = 118 * SC, out = [], area = 0;
+    var ok = z.filter(function (r) { return r.x1 - r.x0 > 2 * m && r.y1 > r.y0; });
+    ok.forEach(function (r) { r.area = (r.x1 - r.x0 - 2 * m) * Math.max(20, r.y1 - r.y0); area += r.area; });
+    for (var tries = 0; tries < 900 && out.length < want; tries++) {
+      var u = Math.random() * area, r = ok[0];
+      for (var k = 0; k < ok.length; k++) { u -= ok[k].area; if (u <= 0) { r = ok[k]; break; } }
+      var p = { x: rand(r.x0 + m, r.x1 - m), y: rand(r.y0, r.y1), z: r };
+      if (out.every(function (q) { var dx = q.x - p.x, dy = (q.y - p.y) * 1.4; return dx * dx + dy * dy > gap * gap; })) out.push(p);
     }
     return out;
   }
@@ -136,22 +147,24 @@
     layer.innerHTML = ""; actors = [];
     zones = measure();
     if (!zones.length) return;
-    var all = [];
-    // interleave the zones' spots so the first stations spread out across the section
-    var lists = zones.map(slots), i = 0, more = true;
-    while (more) { more = false; lists.forEach(function (l) { if (l[i]) { all.push(l[i]); more = true; } }); i++; }
-    var nWalk = Math.min(WALKERS.length, Math.max(2, Math.round(all.length / 3)));
+    var all = scatter(zones, STATIONS.length + DECOR.length);
     var nStat = Math.min(STATIONS.length, all.length);
-    for (var k = 0; k < nStat && k < all.length; k++) addStation(STATIONS[k], all[k]);
-    // a few flowers and mushrooms on whatever spots are left
-    for (var d = nStat; d < all.length; d++) staticSprite(DECOR[d % DECOR.length], all[d].x + rand(-30, 30), all[d].y + rand(-10, 20));
-    for (var w = 0; w < nWalk; w++) addWalker(WALKERS[w], zones[w % zones.length]);
+    // the animals and smaller jobs come last in the list, so the woodworkers always get a spot
+    for (var k = 0; k < nStat; k++) addStation(STATIONS[k], all[k]);
+    for (var d = nStat; d < all.length; d++) staticSprite(DECOR[d % DECOR.length], all[d].x, all[d].y);
+    // carriers walk the long strips (the gutters, or the lane on small screens)
+    var roam = zones.filter(function (r) { return r.kind !== "top"; });
+    if (!roam.length) roam = zones;
+    var nWalk = Math.min(WALKERS.length, Math.max(2, Math.round(nStat / 3)));
+    for (var w = 0; w < nWalk; w++) addWalker(WALKERS[w], roam[w % roam.length]);
   }
   function addStation(def, at) {
     var a = { def: def, el: makeEl("rtk-guy"), x: at.x, y: at.y, flip: Math.random() < 0.5 && !def.prop, zone: at.z,
               t: Math.random() * 10, fps: def.animal ? 8 : 10, mode: "work", until: 0 };
     if (def.prop) {
-      a.prop = { name: def.prop[0], dx: def.prop[1], dy: def.prop[2], el: makeEl("rtk-prop") };
+      // the pile goes on the side facing the middle of the grass, so it never pokes into the text
+      var inward = at.x < (at.z.x0 + at.z.x1) / 2 ? 1 : -1;
+      a.prop = { name: def.prop[0], dx: Math.abs(def.prop[1]) * inward, dy: def.prop[2], el: makeEl("rtk-prop") };
       var s = S[a.prop.name]; a.prop.el.style.width = s[0] + "px"; a.prop.el.style.height = s[1] + "px";
       a.prop.el.dataset.src = DIR + a.prop.name + ".webp";
       if (loaded) a.prop.el.style.backgroundImage = "url(" + a.prop.el.dataset.src + ")";
