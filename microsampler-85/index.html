@@ -52,7 +52,7 @@
       </div>
       <div class="mold screen-wrap">
         <div class="flyer o price">$10!<small>one time</small></div>
-        <img id="hero-shot" src="../img/window-black-bends.jpg?v=2" alt="Microsampler 85' with the black skin, the circuit bend settings and the Moog filter open" width="2319" height="710">
+        <img id="hero-shot" src="../img/window-black-bends.jpg?v=3" alt="Microsampler 85' with the black skin, the circuit bend settings and the Moog filter open" width="2319" height="710">
         <div class="skins" role="group" aria-label="Skin">skin
           <button type="button" data-skin="black" aria-pressed="true" aria-label="Black skin"></button>
           <button type="button" data-skin="pink" aria-pressed="false" aria-label="Pink skin"></button>
@@ -64,10 +64,10 @@
   <!-- 4 · screens -->
   <section style="padding-top: 0">
     <div class="wrap screens">
-      <figure><img src="../img/bay-pink-sample.jpg?v=2" alt="The sample screen" width="520" height="840" loading="lazy"><figcaption>SAMPLE</figcaption></figure>
-      <figure><img src="../img/bay-black-drums.jpg?v=2" alt="The drum editor" width="520" height="840" loading="lazy"><figcaption>DRUMS</figcaption></figure>
-      <figure><img src="../img/bay-pink-lfo.jpg?v=2" alt="The two LFOs" width="520" height="840" loading="lazy"><figcaption>LFO</figcaption></figure>
-      <figure><img src="../img/bay-black-filter.jpg" alt="The filter bay: a JP-8000 style filter with blend and a tempo-synced LFO" width="520" height="840" loading="lazy"><figcaption>FILTER</figcaption></figure>
+      <figure><img src="../img/bay-pink-sample.jpg?v=3" alt="The sample screen" width="520" height="840" loading="lazy"><figcaption>SAMPLE</figcaption></figure>
+      <figure><img src="../img/bay-black-drums.jpg?v=3" alt="The drum editor" width="520" height="840" loading="lazy"><figcaption>DRUMS</figcaption></figure>
+      <figure><img src="../img/bay-pink-lfo.jpg?v=3" alt="The two LFOs" width="520" height="840" loading="lazy"><figcaption>LFO</figcaption></figure>
+      <figure><img src="../img/bay-black-filter.jpg?v=3" alt="The filter bay: a JP-8000 style filter with blend and a tempo-synced LFO" width="520" height="840" loading="lazy"><figcaption>FILTER</figcaption></figure>
     </div>
   </section>
 
@@ -474,8 +474,8 @@
   // skin switch for the big screenshot
   (function () {
     var img = document.getElementById("hero-shot");
-    var shots = { black: ["../img/window-black-bends.jpg?v=2", "Microsampler 85' with the black skin, the circuit bend settings and the Moog filter open"],
-                  pink: ["../img/window-pink-sample.jpg?v=2", "Microsampler 85' with the pink skin, the sample screen and the JP-8000 filter open"] };
+    var shots = { black: ["../img/window-black-bends.jpg?v=3", "Microsampler 85' with the black skin, the circuit bend settings and the Moog filter open"],
+                  pink: ["../img/window-pink-sample.jpg?v=3", "Microsampler 85' with the pink skin, the sample screen and the JP-8000 filter open"] };
     new Image().src = shots.pink[0];
     document.querySelectorAll(".skins button").forEach(function (b) {
       b.addEventListener("click", function () {
