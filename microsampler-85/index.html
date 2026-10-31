@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css?v=15">
-<link rel="stylesheet" href="ms85.css?v=9">
+<link rel="stylesheet" href="ms85.css?v=10">
 <meta property="og:title" content="Microsampler 85' by Brownie Digital">
 <meta property="og:description" content="An 8-bit vintage sampler for your Mac: crunchy 9 kHz sampling, circuit bends, a rhythm box. $10.">
 <meta property="og:image" content="https://uncleacid1.github.io/img/window-black-grille.jpg">
@@ -78,6 +78,37 @@
       <div class="steps" id="steps" aria-hidden="true"></div>
     </div>
     <div class="gif-row" style="max-width: var(--wrap); margin: 0 auto; padding: 4px 16px 20px; justify-content: space-around"><img class="gif" src="../img/gif/skeleton.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/cassette.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/drum.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/guitar.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/speaker-btn.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/cd-2.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/dancer.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/music-speaker.gif" alt="" loading="lazy"><img class="gif" src="../img/gif/floppy-robot.gif" alt="" loading="lazy"></div>
+  </section>
+
+  <!-- 4b · the song: the whole track, with every part held-to-solo -->
+  <section id="song" style="padding-top: 10px">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-lofi="0.4" data-sy="1.3"><span class="ln">a song, made with it</span></h2>
+        <span class="lbl">hold a key to hear one part</span>
+      </div>
+      <div class="mold song">
+        <div class="lbl">the sampler at work <span class="mini-keys"><span class="y"></span><span class="b"></span></span></div>
+        <p>Everything in this track comes out of Microsampler 85': its built-in tones, sampled drums, and a guitar I played myself and then sampled. The rest is editing with the sampler's own tools, chopping and bending. Press play for the whole song, then hold down any part to hear just that on its own. Let go and you drop straight back into the mix. Headphones help.</p>
+        <div class="song-top">
+          <button type="button" class="song-play" id="songPlay" aria-label="Play the song">play</button>
+          <div class="lcd song-lcd"><span id="songState">FULL MIX</span><span id="songTime">0:00 / 0:27</span></div>
+        </div>
+        <div class="song-grid" id="songGrid">
+          <div class="song-row main"><span class="song-name">full mix</span><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
+          <div class="song-row"><button type="button" class="song-btn" data-s="drums" aria-label="Hold to hear only the drums">drums</button><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
+          <div class="song-row"><button type="button" class="song-btn" data-s="ride" aria-label="Hold to hear only the ride">ride</button><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
+          <div class="song-row"><button type="button" class="song-btn" data-s="bass" aria-label="Hold to hear only the bass">bass</button><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
+          <div class="song-row"><button type="button" class="song-btn" data-s="accent-bass" aria-label="Hold to hear only the accent bass">accent bass</button><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
+          <div class="song-row"><button type="button" class="song-btn" data-s="guitar" aria-label="Hold to hear only the guitar">guitar</button><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
+          <div class="song-row"><button type="button" class="song-btn" data-s="pad" aria-label="Hold to hear only the pad">pad</button><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
+          <div class="song-row"><button type="button" class="song-btn" data-s="human-voice" aria-label="Hold to hear only the human voice">human voice</button><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
+          <div class="song-row"><button type="button" class="song-btn" data-s="vocals-raw" aria-label="Hold to hear only the vocals, dry">vocals, dry</button><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
+          <div class="song-row"><button type="button" class="song-btn" data-s="vocals" aria-label="Hold to hear only the vocals, sampled">vocals, sampled</button><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
+        </div>
+        <p class="small" id="songNote">About 3 MB loads when you press play. Click the waveforms to jump around.</p>
+      </div>
+    </div>
   </section>
 
   <!-- 4c · why this one -->
@@ -354,6 +385,93 @@
 </footer>
 
 <script src="../js/site.js?v=7" defer></script>
+<script>
+// the song: every part plays in sync; holding a key solos it, letting go returns to the full mix
+(function () {
+  var grid = document.getElementById('songGrid'); if (!grid) return;
+  var playBtn = document.getElementById('songPlay'), stateEl = document.getElementById('songState'), timeEl = document.getElementById('songTime'), note = document.getElementById('songNote');
+  var AC = window.AudioContext || window.webkitAudioContext; if (!AC) { note.textContent = "This browser can't play the song player."; return; }
+  var names = ['main', 'drums', 'ride', 'bass', 'accent-bass', 'guitar', 'pad', 'human-voice', 'vocals-raw', 'vocals'];
+  var ctx = null, bufs = null, gains = {}, srcs = [], dur = 27.17, t0 = 0, started = false, playing = false, loading = false, held = {};
+  var rows = {}; grid.querySelectorAll('.song-row').forEach(function (r) { var b = r.querySelector('.song-btn'); rows[b ? b.dataset.s : 'main'] = r; });
+  function fmt(t) { t = Math.max(0, Math.floor(t)); return Math.floor(t / 60) + ':' + ('0' + (t % 60)).slice(-2); }
+  function pos() { return started ? (((ctx.currentTime - t0) % dur) + dur) % dur : 0; }
+  function show() { var p = pos(); grid.style.setProperty('--p', (p / dur).toFixed(4)); timeEl.textContent = fmt(p) + ' / ' + fmt(dur); }
+  function tick() { show(); if (playing) requestAnimationFrame(tick); }
+  function peaks(buf, n) {
+    var out = new Float32Array(n), step = buf.length / n;
+    for (var c = 0; c < buf.numberOfChannels; c++) { var d = buf.getChannelData(c);
+      for (var i = 0; i < n; i++) { var m = out[i], a = Math.floor(i * step), b = Math.floor((i + 1) * step); for (var j = a; j < b; j += 4) { var v = d[j] < 0 ? -d[j] : d[j]; if (v > m) m = v; } out[i] = m; } }
+    return out;
+  }
+  var pk = {};
+  function draw() {
+    if (!bufs) return;
+    names.forEach(function (n) {
+      var cv = rows[n].querySelector('canvas'), w = cv.clientWidth, h = cv.clientHeight, r = window.devicePixelRatio || 1;
+      cv.width = Math.round(w * r); cv.height = Math.round(h * r);
+      var g = cv.getContext('2d'); g.scale(r, r); g.fillStyle = n === 'main' ? '#3fb2e6' : '#9fd86b';
+      var p = pk[n] || (pk[n] = peaks(bufs[n], 400)), bw = w / p.length;
+      for (var i = 0; i < p.length; i++) { var bh = Math.max(1, Math.pow(p[i], .6) * h * .92); g.fillRect(i * bw, (h - bh) / 2, Math.max(1, bw - .5), bh); }
+    });
+  }
+  function load() {
+    if (bufs || loading) return Promise.resolve();
+    loading = true; playBtn.textContent = '...'; var done = 0;
+    ctx = new AC();
+    return Promise.all(names.map(function (n) {
+      return fetch('song/' + n + '.mp3').then(function (r) { if (!r.ok) throw 0; return r.arrayBuffer(); }).then(function (ab) {
+        return new Promise(function (ok, no) { ctx.decodeAudioData(ab, ok, no); });
+      }).then(function (b) { done++; note.textContent = 'Loading ' + done + ' of ' + names.length + '...'; return b; });
+    })).then(function (list) {
+      bufs = {}; names.forEach(function (n, i) { bufs[n] = list[i]; });
+      dur = bufs.main.duration; names.forEach(function (n) { var g = ctx.createGain(); g.gain.value = n === 'main' ? 1 : 0; g.connect(ctx.destination); gains[n] = g; });
+      note.textContent = 'Hold a key to hear one part. Click the waveforms to jump around.';
+      loading = false; draw();
+    }).catch(function () { loading = false; ctx = null; playBtn.textContent = 'play'; note.textContent = "The song didn't load. Check your connection and try again."; throw 0; });
+  }
+  function launch(off) {
+    srcs.forEach(function (s) { try { s.stop(); } catch (e) {} });
+    var when = ctx.currentTime + 0.05;
+    srcs = names.map(function (n) { var s = ctx.createBufferSource(); s.buffer = bufs[n]; s.loop = true; s.connect(gains[n]); s.start(when, off); return s; });
+    t0 = when - off; started = true;
+  }
+  function play() {
+    return load().then(function () {
+      if (!started) launch(0);
+      return ctx.resume();
+    }).then(function () { playing = true; playBtn.textContent = 'pause'; playBtn.classList.add('on'); tick(); });
+  }
+  function pause() { if (!playing) return; playing = false; ctx.suspend(); playBtn.textContent = 'play'; playBtn.classList.remove('on'); show(); }
+  function mix() {
+    var keys = Object.keys(held).filter(function (k) { return held[k]; }), t = ctx ? ctx.currentTime : 0;
+    if (gains.main) names.forEach(function (n) { var on = keys.length ? keys.indexOf(n) >= 0 : n === 'main'; gains[n].gain.setTargetAtTime(on ? 1 : 0, t, 0.004); });
+    names.forEach(function (n) { if (rows[n]) rows[n].classList.toggle('solo', keys.indexOf(n) >= 0); });
+    grid.classList.toggle('soloing', keys.length > 0);
+    stateEl.textContent = keys.length ? 'SOLO: ' + keys.map(function (k) { return rows[k].querySelector('.song-btn').textContent.toUpperCase(); }).join(' + ') : 'FULL MIX';
+  }
+  function down(k) { if (held[k]) return; held[k] = true; if (!playing) play().then(mix); mix(); }
+  function up(k) { if (!held[k]) return; held[k] = false; mix(); }
+  grid.querySelectorAll('.song-btn').forEach(function (b) {
+    var k = b.dataset.s;
+    b.addEventListener('pointerdown', function (e) { e.preventDefault(); try { b.setPointerCapture(e.pointerId); } catch (x) {} down(k); });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (t) { b.addEventListener(t, function () { up(k); }); });
+    b.addEventListener('keydown', function (e) { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); down(k); } });
+    b.addEventListener('keyup', function (e) { if (e.key === ' ' || e.key === 'Enter') up(k); });
+    b.addEventListener('blur', function () { up(k); });
+    b.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  });
+  grid.querySelectorAll('.song-lane').forEach(function (l) {
+    l.addEventListener('pointerdown', function (e) {
+      var r = l.getBoundingClientRect(), f = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+      load().then(function () { launch(f * dur); show(); if (!playing) play(); }).catch(function () {});
+    });
+  });
+  playBtn.addEventListener('click', function () { if (playing) pause(); else play().catch(function () {}); });
+  document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.hear-btn')) pause(); });
+  window.addEventListener('resize', draw);
+})();
+</script>
 <script>
 // the orchestra hit: one clip at a time
 (function () {
