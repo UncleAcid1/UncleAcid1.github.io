@@ -12,8 +12,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css?v=17">
-<link rel="stylesheet" href="ms85.css?v=10">
+<link rel="stylesheet" href="../style.css?v=18">
+<link rel="stylesheet" href="ms85.css?v=11">
 <meta property="og:title" content="Microsampler 85' by Brownie Digital">
 <meta property="og:description" content="An 8-bit vintage sampler for your Mac: crunchy 9 kHz sampling, circuit bends, a rhythm box. $10.">
 <meta property="og:image" content="https://uncleacid1.github.io/img/window-black-grille.jpg">
@@ -97,6 +97,7 @@
           <div class="lcd song-lcd"><span id="songState">FULL MIX</span><span id="songTime">0:00 / 0:27</span></div>
         </div>
         <div class="song-grid" id="songGrid">
+          <div class="song-loading" id="songLoading" hidden role="status"><span>Loading<b class="dots"></b></span></div>
           <div class="song-row main"><span class="song-name">full mix</span><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
           <div class="song-row"><button type="button" class="song-btn" data-s="drums" aria-label="Hold to hear only the drums">drums</button><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
           <div class="song-row"><button type="button" class="song-btn" data-s="ride" aria-label="Hold to hear only the ride">ride</button><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
@@ -391,7 +392,7 @@
 // the song: every part plays in sync; holding a key solos it, letting go returns to the full mix
 (function () {
   var grid = document.getElementById('songGrid'); if (!grid) return;
-  var playBtn = document.getElementById('songPlay'), stateEl = document.getElementById('songState'), timeEl = document.getElementById('songTime'), note = document.getElementById('songNote');
+  var playBtn = document.getElementById('songPlay'), stateEl = document.getElementById('songState'), timeEl = document.getElementById('songTime'), note = document.getElementById('songNote'), loadEl = document.getElementById('songLoading');
   var AC = window.AudioContext || window.webkitAudioContext; if (!AC) { note.textContent = "This browser can't play the song player."; return; }
   var names = ['main', 'drums', 'ride', 'bass', 'accent-bass', 'guitar', 'pad', 'human-voice', 'vocals-raw', 'vocals'];
   var ctx = null, bufs = null, gains = {}, srcs = [], dur = 27.17, t0 = 0, started = false, playing = false, loading = false, held = {};
@@ -419,7 +420,7 @@
   }
   function load() {
     if (bufs || loading) return Promise.resolve();
-    loading = true; playBtn.textContent = '...'; var done = 0;
+    loading = true; playBtn.textContent = 'wait'; stateEl.textContent = 'LOADING'; loadEl.hidden = false; var done = 0;
     ctx = new AC();
     return Promise.all(names.map(function (n) {
       return fetch('song/' + n + '.mp3').then(function (r) { if (!r.ok) throw 0; return r.arrayBuffer(); }).then(function (ab) {
@@ -429,8 +430,8 @@
       bufs = {}; names.forEach(function (n, i) { bufs[n] = list[i]; });
       dur = bufs.main.duration; names.forEach(function (n) { var g = ctx.createGain(); g.gain.value = n === 'main' ? 1 : 0; g.connect(ctx.destination); gains[n] = g; });
       note.textContent = 'Hold a key to hear one part. Click the waveforms to jump around.';
-      loading = false; draw();
-    }).catch(function () { loading = false; ctx = null; playBtn.textContent = 'play'; note.textContent = "The song didn't load. Check your connection and try again."; throw 0; });
+      loading = false; loadEl.hidden = true; mix(); draw();
+    }).catch(function () { loading = false; loadEl.hidden = true; stateEl.textContent = 'FULL MIX'; ctx = null; playBtn.textContent = 'play'; note.textContent = "The song didn't load. Check your connection and try again."; throw 0; });
   }
   function launch(off) {
     srcs.forEach(function (s) { try { s.stop(); } catch (e) {} });

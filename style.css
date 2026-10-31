@@ -441,3 +441,7 @@ html.stone-mode { filter: invert(1) hue-rotate(180deg); }
 .home .fx-mark, .about .fx-mark { --fxm: #c08a5c; }
 .home .fx-wave { --fxw: #f3d22a; }
 .home .fx-pop { --fxp: #ffd9a0; }
+
+/* animated "..." for loading text */
+.dots::after { content: ""; display: inline-block; width: 1.5em; text-align: left; animation: dots 1.2s steps(1) infinite; }
+@keyframes dots { 0% { content: ""; } 25% { content: "."; } 50% { content: ".."; } 75% { content: "..."; } }
