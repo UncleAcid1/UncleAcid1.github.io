@@ -110,8 +110,14 @@
           <div class="song-row"><button type="button" class="song-btn" data-s="vocals" aria-label="Hold to hear only the vocals, sampled">vocals, sampled</button><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div>
         </div>
         <p class="small" id="songNote">About 3 MB loads when you press play. Click the waveforms to jump around.</p>
-        <p class="small alt-demo">Another take, with more of the stock sounds (full mix only):</p>
-        <audio class="alt-audio" controls preload="none" src="song/alt.mp3"></audio>
+        <div class="alt-demo">
+          <p class="small">Another take, using more of the stock sounds. Just the full mix, and it loops.</p>
+          <div class="song-top">
+            <button type="button" class="song-play" id="altPlay" aria-label="Play the second song">play</button>
+            <div class="lcd song-lcd"><span>STOCK SOUNDS</span><span id="altTime">0:00 / 0:00</span></div>
+          </div>
+          <div class="song-grid alt-grid" id="altGrid"><div class="song-row main"><div class="song-lane"><canvas></canvas><i class="ph"></i></div></div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -475,6 +481,49 @@
   playBtn.addEventListener('click', function () { if (playing) pause(); else play().catch(function () {}); });
   document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.hear-btn')) pause(); });
   window.addEventListener('resize', draw);
+})();
+</script>
+<script>
+// the second song: one looping full mix
+(function () {
+  var btn = document.getElementById('altPlay'); if (!btn) return;
+  var grid = document.getElementById('altGrid'), timeEl = document.getElementById('altTime'), cv = grid.querySelector('canvas'), lane = grid.querySelector('.song-lane');
+  var a = new Audio('song/alt.mp3'); a.loop = true; a.preload = 'none';
+  var pk = null, raf = 0;
+  function fmt(t) { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + ('0' + (t % 60)).slice(-2); }
+  function show() { var d = a.duration || 0; grid.style.setProperty('--p', d ? (a.currentTime / d).toFixed(4) : 0); timeEl.textContent = fmt(a.currentTime) + ' / ' + fmt(d); if (!a.paused) raf = requestAnimationFrame(show); }
+  function draw() {
+    if (!pk) return;
+    var w = cv.clientWidth, h = cv.clientHeight, r = window.devicePixelRatio || 1; cv.width = Math.round(w * r); cv.height = Math.round(h * r);
+    var g = cv.getContext('2d'); g.scale(r, r); g.fillStyle = '#3fb2e6'; var bw = w / pk.length;
+    for (var i = 0; i < pk.length; i++) { var bh = Math.max(1, Math.pow(pk[i], .6) * h * .92); g.fillRect(i * bw, (h - bh) / 2, Math.max(1, bw - .5), bh); }
+  }
+  function wave() {
+    var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+    fetch('song/alt.mp3').then(function (r) { return r.arrayBuffer(); }).then(function (ab) {
+      var c = new AC(); return new Promise(function (ok, no) { c.decodeAudioData(ab, ok, no); }).then(function (b) { c.close(); return b; });
+    }).then(function (b) {
+      var n = 400, d = b.getChannelData(0), step = d.length / n; pk = new Float32Array(n);
+      for (var i = 0; i < n; i++) { var m = 0; for (var j = Math.floor(i * step), e = Math.floor((i + 1) * step); j < e; j += 4) { var v = Math.abs(d[j]); if (v > m) m = v; } pk[i] = m; }
+      draw(); show();
+    }).catch(function () {});
+  }
+  var mainBtn = document.getElementById('songPlay');
+  function stopMain() { if (mainBtn && mainBtn.classList.contains('on')) mainBtn.click(); }
+  function pause() { a.pause(); btn.textContent = 'play'; btn.classList.remove('on'); cancelAnimationFrame(raf); show(); }
+  btn.addEventListener('click', function () {
+    if (!a.paused) { pause(); return; }
+    stopMain(); a.play().then(function () { btn.textContent = 'pause'; btn.classList.add('on'); show(); }).catch(function () {});
+  });
+  if (mainBtn) mainBtn.addEventListener('click', function () { if (!a.paused && !mainBtn.classList.contains('on')) pause(); });
+  lane.addEventListener('pointerdown', function (e) {
+    var rc = lane.getBoundingClientRect(), f = Math.min(1, Math.max(0, (e.clientX - rc.left) / rc.width));
+    var go = function () { if (a.duration) a.currentTime = f * a.duration; if (a.paused) btn.click(); show(); };
+    if (a.readyState) go(); else { a.addEventListener('loadedmetadata', go, { once: true }); a.load(); }
+  });
+  a.addEventListener('loadedmetadata', show);
+  window.addEventListener('resize', draw);
+  a.preload = 'metadata'; a.load(); wave();
 })();
 </script>
 <script>

@@ -291,4 +291,6 @@
 .song-loading { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; background: #16200fcc; font-family: var(--pixel); font-size: 34px; color: var(--lcd); text-shadow: 0 0 8px rgba(160,220,110,.6); }
 .song-loading[hidden] { display: none; }
 .song-loading b { font-weight: 400; }
-.song .alt-audio { display: block; width: 100%; max-width: 420px; margin-top: 8px; height: 36px; }
+.song .alt-demo { margin-top: 26px; padding-top: 4px; border-top: 1px solid #ffffff1c; }
+.song .alt-demo .small { margin: 14px 0 12px; font-size: 15px; color: #c9c9cf; }
+.alt-grid .song-row { grid-template-columns: minmax(0, 1fr); }
