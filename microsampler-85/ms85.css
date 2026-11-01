@@ -291,3 +291,4 @@
 .song-loading { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; background: #16200fcc; font-family: var(--pixel); font-size: 34px; color: var(--lcd); text-shadow: 0 0 8px rgba(160,220,110,.6); }
 .song-loading[hidden] { display: none; }
 .song-loading b { font-weight: 400; }
+.song .alt-audio { display: block; width: 100%; max-width: 420px; margin-top: 8px; height: 36px; }
