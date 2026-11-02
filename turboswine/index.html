@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TurboSwine 1988</title>
+<meta name="description" content="TurboSwine by Brownie Digital: a 1988-style modular sound designer and wavefolder, made to chase the guitar tone of Nine Inch Nails. For Mac and Windows. Free version, or $5 for everything.">
+<link rel="icon" type="image/png" sizes="96x96" href="img/icon-96.png">
+<link rel="apple-touch-icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="turboswine.css?v=11">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the page</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="mark" href="../"><img src="../img/brownie-dither.png" alt="" width="24" height="24"><span>Brownie Digital</span></a>
+    <nav class="nav" aria-label="Site">
+      <a href="../microsampler-85/">Microsampler 85'</a>
+      <a href="./" aria-current="page">TurboSwine</a>
+      <a href="../#stone">STONE</a>
+      <a href="../#guestbook">Guestbook</a>
+      <a href="../support/">Help</a>
+    </nav>
+    <span class="clock" id="clock"></span>
+  </div>
+</header>
+<div class="subbar">
+  <nav aria-label="This page">
+    <a href="#porcellus">Porcellus</a>
+    <a href="#song">Waveshaper demo</a>
+    <a href="#patches">Each part</a>
+    <a href="#inside">Inside</a>
+    <a href="#get">Get it</a>
+  </nav>
+  <button type="button" class="pig-toggle" id="pigToggle" aria-pressed="true">Pigs: on</button>
+</div>
+
+<main id="main">
+
+<section data-tubes class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <img class="hero-icon" src="img/icon.png" alt="TurboSwine's icon: a guinea pig's face, with buck teeth, in black and white pixels" width="256" height="256">
+      <h1>TurboSwine <span>1988</span></h1>
+      <p class="lede"><strong>I made this to get the guitar tone of Nine Inch Nails.</strong> It's a modular sound designer with a filthy little wavefolder in it. Patch modules together, bend the sound through a curve you draw, and play it from the keys, or run a guitar straight through it.</p>
+      <p class="cta">
+        <a class="btn" href="#get">Download it free</a>
+        <a class="btn alt" href="#porcellus">Hear Porcellus</a>
+      </p>
+      <p class="small">Mac and Windows. AU, VST3, LV2 and a standalone app.</p>
+    </div>
+    <figure class="fold" aria-labelledby="foldTitle">
+      <figcaption id="foldTitle">Try the wavefolder</figcaption>
+      <canvas id="foldScope" width="640" height="300" role="img" aria-label="A sine wave folding back on itself. The more drive, the more folds."></canvas>
+      <label for="foldDrive">Drive <output id="foldOut" for="foldDrive">1.0</output></label>
+      <input id="foldDrive" type="range" min="1" max="9" step="0.1" value="2.4">
+      <button type="button" class="btn small-btn" id="foldHear" aria-pressed="false">Hear it</button>
+      <p class="small">Past the top of the curve, the wave turns round and comes back down. Every fold is new harmonics.</p>
+    </figure>
+  </div>
+</section>
+
+<section data-tubes class="stage" id="porcellus">
+  <div class="wrap">
+    <h2>Porcellus</h2>
+    <p class="lede">The TurboSwine demonstration track. Every note is a TurboSwine preset, run through TurboSwine FX. I mixed and mastered it from the stems. Jump to a part to hear what each patch does.</p>
+    <div class="player big" data-player data-title="Porcellus" data-len="3:20">
+      <div class="ab" hidden><button type="button" data-file="song/porcellus.mp3" data-label="Porcellus" aria-pressed="true">Porcellus</button></div>
+      <div class="lane">
+        <canvas></canvas>
+        <i class="pig runner" data-coat="3" aria-hidden="true"></i>
+      </div>
+      <div class="transport">
+        <button type="button" class="play">Play</button>
+        <input type="range" class="seek" min="0" max="1000" value="0" aria-label="Position in Porcellus">
+        <span class="time">0:00 / 3:20</span>
+      </div>
+      <p class="status small" role="status">About 6 MB loads when you press play.</p>
+      <ol class="chapters" aria-label="Jump to a part of Porcellus">
+        <li><button type="button" data-at="0"><b>0:00</b> Wavetable Cathedral <span>Stepped wavetables and a ring-modulated sine, in the Stone Nave reverb.</span></button></li>
+        <li><button type="button" data-at="19.2"><b>0:19</b> Ladder Round and Wide Strings <span>A saw through the Ladder Filter, pulsing into Tape Slap. Detuned saws in Tape Chorus.</span></button></li>
+        <li><button type="button" data-at="38.4"><b>0:38</b> Filter Pluck <span>A square through a fast filter envelope, thrown into Dotted Dub.</span></button></li>
+        <li><button type="button" data-at="76.8"><b>1:17</b> Melted Flute and ROM Vox <span>A wavering voice wave in Stone Nave. A low-rate choir in Shimmer Attic.</span></button></li>
+        <li><button type="button" data-at="96"><b>1:36</b> Thin Pulse and the acoustic kit <span>A narrow pulse on an Old Film Reel, with drums built from heads, shells and wires.</span></button></li>
+        <li><button type="button" data-at="115.2"><b>1:55</b> Struck PM and Guinea Pig Laugh <span>Phase-modulated bells in Ring Bounce. The laugh in the Ring Hall.</span></button></li>
+        <li><button type="button" data-at="134.4"><b>2:14</b> Everything <span>The whole lot together, each part in its own room.</span></button></li>
+        <li><button type="button" data-at="172.8"><b>2:53</b> Back into the nave <span>Wavetable Cathedral again, and out.</span></button></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section data-tubes class="paper" id="song">
+  <div class="wrap">
+    <h2>The waveshaper demo</h2>
+    <p class="lede">Inspired by "March of the Pigs", which is where the guinea pigs came from. This is my go at that guitar tone, and it's here to show how awesome the wavefolding is. It's the same mix twice: flip the switch while it plays and hear the wavefolder come out of everything at once.</p>
+    <div class="player big" data-player data-title="the whole song" data-len="1:13">
+      <div class="ab" role="group" aria-label="Which version of the song">
+        <button type="button" data-file="song/song-before.mp3" data-label="without the wavefolder">Before</button>
+        <button type="button" data-file="song/song-after.mp3" data-label="with the wavefolder" aria-pressed="true">After</button>
+      </div>
+      <div class="lane">
+        <canvas></canvas>
+        <i class="pig runner" data-coat="1" aria-hidden="true"></i>
+      </div>
+      <div class="transport">
+        <button type="button" class="play">Play</button>
+        <input type="range" class="seek" min="0" max="1000" value="0" aria-label="Position in the song">
+        <span class="time">0:00 / 1:13</span>
+      </div>
+      <p class="status small" role="status">About 2 MB loads when you press play.</p>
+    </div>
+  </div>
+</section>
+
+<section data-tubes class="inside" id="patches">
+  <div class="wrap">
+    <h2>Each part on its own</h2>
+    <p class="lede">Every part of the song on its own, so you can hear what the patches do.</p>
+    <div class="cards">
+
+      <article class="win">
+        <h3><i class="pig" data-coat="2" aria-hidden="true"></i> Drums</h3>
+        <div class="win-body player" data-player data-title="the drums" data-len="1:13">
+          <p>A plain drum track, then the same drums run through a wavefolder and mixed back in at 39%.</p>
+          <div class="ab" role="group" aria-label="Which version of the drums">
+            <button type="button" data-file="song/drums-before.mp3" data-label="by themselves" aria-pressed="true">By themselves</button>
+            <button type="button" data-file="song/drums-after.mp3" data-label="through the wavefolder">Wavefolded</button>
+          </div>
+          <div class="lane"><canvas></canvas></div>
+          <div class="transport"><button type="button" class="play">Play</button><input type="range" class="seek" min="0" max="1000" value="0" aria-label="Position in the drums"><span class="time">0:00 / 1:13</span></div>
+          <p class="status small" role="status"></p>
+        </div>
+      </article>
+
+      <article class="win">
+        <h3><i class="pig" data-coat="4" aria-hidden="true"></i> Guitar</h3>
+        <div class="win-body player" data-player data-title="the guitar" data-len="1:13">
+          <p>Three wavefolded guitars stacked into one sound, each with its own patch. Hear them one at a time: the left, the right and the middle.</p>
+          <div class="ab" role="group" aria-label="Which guitar layer">
+            <button type="button" data-file="song/guitar-left.mp3" data-label="the left guitar" aria-pressed="true">Left</button>
+            <button type="button" data-file="song/guitar-right.mp3" data-label="the right guitar">Right</button>
+            <button type="button" data-file="song/guitar-middle.mp3" data-label="the middle guitar">Middle</button>
+          </div>
+          <div class="lane"><canvas></canvas></div>
+          <div class="transport"><button type="button" class="play">Play</button><input type="range" class="seek" min="0" max="1000" value="0" aria-label="Position in the guitar"><span class="time">0:00 / 1:13</span></div>
+          <p class="status small" role="status"></p>
+        </div>
+      </article>
+
+      <article class="win">
+        <h3><i class="pig" data-coat="5" aria-hidden="true"></i> Bass</h3>
+        <div class="win-body player" data-player data-title="the bass" data-len="1:04">
+          <p>Played from the keys, from TurboSwine's first patch: one oscillator into the output.</p>
+          <div class="ab" hidden><button type="button" data-file="song/bass.mp3" data-label="bass" aria-pressed="true">Bass</button></div>
+          <div class="lane"><canvas></canvas></div>
+          <div class="transport"><button type="button" class="play">Play</button><input type="range" class="seek" min="0" max="1000" value="0" aria-label="Position in the bass"><span class="time">0:00 / 1:04</span></div>
+          <p class="status small" role="status"></p>
+        </div>
+      </article>
+
+      <article class="win">
+        <h3><i class="pig" data-coat="3" aria-hidden="true"></i> The squealing guitar break</h3>
+        <div class="win-body player" data-player data-title="the guitar break" data-len="0:04">
+          <p>Four seconds of guitar through a Waveshaper, a Modulator and a Pitch Shifter.</p>
+          <div class="ab" hidden><button type="button" data-file="song/pitch.mp3" data-label="guitar break" aria-pressed="true">Break</button></div>
+          <div class="lane"><canvas></canvas></div>
+          <div class="transport"><button type="button" class="play">Play</button><input type="range" class="seek" min="0" max="1000" value="0" aria-label="Position in the guitar break"><span class="time">0:00 / 0:04</span></div>
+          <p class="status small" role="status"></p>
+        </div>
+      </article>
+
+      <article class="win wide">
+        <h3><i class="pig" data-coat="0" aria-hidden="true"></i> The pigs</h3>
+        <div class="win-body player" data-player data-title="the pig noises" data-len="0:05">
+          <p>The squeals came out of TurboSwine too, with the gaps between them taken out here. The "Guinea Pig Laugh" preset comes with the plug-in.</p>
+          <div class="ab" hidden><button type="button" data-file="song/oink.mp3" data-label="pig noises" aria-pressed="true">Pigs</button></div>
+          <div class="lane"><canvas></canvas></div>
+          <div class="transport"><button type="button" class="play">Play</button><input type="range" class="seek" min="0" max="1000" value="0" aria-label="Position in the pig noises"><span class="time">0:00 / 0:05</span></div>
+          <p class="status small" role="status"></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section data-tubes class="paper" id="inside">
+  <div class="wrap">
+    <h2>What's inside</h2>
+    <p class="lede">It does what the 1988 program TurboSynth did, and opens its patch files. The sound is worked out first, then played like a sampler, with all the grit that brings.</p>
+    <figure class="shot">
+      <img src="img/window.png" alt="TurboSwine's window in black and white: a patch of modules joined by cords on the left, the selected module's controls on the right, the finished sound's waveform along the bottom." width="1280" height="840" loading="lazy">
+      <figcaption>One-bit on purpose. There's Big Text, Invert and full keyboard use in the window too.</figcaption>
+    </figure>
+    <ul class="traits">
+      <li><strong>16 original modules.</strong> Oscillators with a harmonic editor, samples, envelopes, a mixer, waveshaper, delay, pitch shifter, diffuser, modulator, noise, spectral inverter, stretcher, time compressor and resonator.</li>
+      <li><strong>Checked against the original.</strong> Each original module is compared with the original program's own code, sample for sample. That means its code computing the sound, not a recording of a 1988 Mac.</li>
+      <li><strong>Draw your own curve.</strong> The waveshaper takes any shape you draw, from gentle grit to folds that turn a sine into a chainsaw.</li>
+    </ul>
+    <button type="button" class="btn alt march-btn" id="marchBtn">PIG MARCH!</button>
+    <p class="small">It's in the plug-in too. Press it.</p>
+  </div>
+</section>
+
+<section data-tubes class="get" id="get">
+  <div class="wrap">
+    <h2>Two ways to get it</h2>
+    <p class="lede">There's one installer for both. Start free, and pay the $5 only if you want the new stuff.</p>
+    <div class="hutches">
+      <div class="hutch">
+        <h3><i class="pig" data-coat="2" aria-hidden="true"></i> Free</h3>
+        <p class="price">$0</p>
+        <p>Everything the original did, for keeps.</p>
+        <p class="dl-label" id="dlFree">Download the free version</p>
+        <div class="dl" role="group" aria-labelledby="dlFree">
+          <a class="btn" href="https://github.com/UncleAcid1/UncleAcid1.github.io/releases/latest/download/TurboSwine.pkg">Mac</a>
+          <a class="btn" href="https://github.com/UncleAcid1/UncleAcid1.github.io/releases/latest/download/TurboSwine-Windows.exe">Windows</a>
+        </div>
+      </div>
+      <div class="hutch full">
+        <h3><i class="pig" data-coat="1" aria-hidden="true"></i> Full</h3>
+        <p class="price">$5</p>
+        <p>All of that, plus everything new. One payment, no subscription.</p>
+        <p class="dl-label" id="dlTrial">Download the trial</p>
+        <div class="dl" role="group" aria-labelledby="dlTrial">
+          <a class="btn alt" href="https://github.com/UncleAcid1/UncleAcid1.github.io/releases/latest/download/TurboSwine.pkg">Mac</a>
+          <a class="btn alt" href="https://github.com/UncleAcid1/UncleAcid1.github.io/releases/latest/download/TurboSwine-Windows.exe">Windows</a>
+        </div>
+        <a class="btn buy" href="https://browniedigital.gumroad.com/l/turboswine?wanted=true">Buy it for $5</a>
+      </div>
+    </div>
+
+    <div class="fx-pitch">
+      <h3>TurboSwine FX, in the $5 version</h3>
+      <p class="lede">A springboard, and a collection of extremely unique-sounding presets unlike any other reverb plug-in you've heard.</p>
+      <p>Put it on a guitar, a voice or a whole mix and start from Stone Nave, Shimmer Attic, Ring Hall, Six Bit Cathedral or Dark Cellar, then bend the patch into your own. It's great for electronic music, indie and alternative, and a definitive need for a producer's toolbag.</p>
+      <figure class="fx-shot">
+        <img src="img/fx-window.png" width="1280" height="840" alt="TurboSwine FX's window: the Stone Nave reverb patched from Live In through delays, mixers and diffusers to two outputs, with the live input's waveform, level meters and a Mix slider along the bottom." loading="lazy">
+        <figcaption>TurboSwine FX running the Stone Nave reverb, with a signal coming in.</figcaption>
+      </figure>
+    </div>
+
+    <div class="table-wrap" tabindex="0" role="region" aria-label="What each version includes">
+      <table>
+        <caption>What's in each version</caption>
+        <thead><tr><th scope="col">Feature</th><th scope="col">Free</th><th scope="col">Full</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">The 16 original modules and the wavefolder</th><td>Yes</td><td>Yes</td></tr>
+          <tr><th scope="row">Opens original patch files</th><td>Yes</td><td>Yes</td></tr>
+          <tr><th scope="row">Harmonic editor, loops, stereo patches</th><td>Yes</td><td>Yes</td></tr>
+          <tr><th scope="row">AU, VST3, LV2 and the app</th><td>Yes</td><td>Yes</td></tr>
+          <tr><th scope="row">TurboSwine FX: your guitar or voice through a patch, live</th><td>No</td><td>Yes</td></tr>
+          <tr><th scope="row">Ladder Filter: warm and squelchy, with sweep and drive</th><td>No</td><td>Yes</td></tr>
+          <tr><th scope="row">Ring Shifter, with an LFO and up to 32 steps that can follow your DAW</th><td>No</td><td>Yes</td></tr>
+          <tr><th scope="row">Pepper Pot: a harsh robot-tyrant voice, with Anger, Gruff, Era and Pitch</th><td>No</td><td>Yes</td></tr>
+          <tr><th scope="row">Stereo and pan on nearly every module</th><td>No</td><td>Yes</td></tr>
+          <tr><th scope="row">The big Sample editor</th><td>No</td><td>Yes</td></tr>
+          <tr><th scope="row">Over 140 presets: hazy tape, jungle, early digital, reverbs, pads, leads, bass, keys, bells</th><td>No</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="reqs">
+      <h3>Before you install</h3>
+      <p><strong>Mac:</strong> macOS 10.11 or newer on Intel, macOS 11 or newer on Apple Silicon. It isn't signed by Apple, so the first time go to System Settings, then Privacy &amp; Security, and click Open Anyway.</p>
+      <p><strong>Windows:</strong> Windows 10 or 11, 64-bit. If a blue box appears, click More info, then Run anyway.</p>
+      <p><a href="../support/">Help and support</a></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>TurboSwine does what the 1988 program TurboSynth did and opens its patch files. The waveshaper demo is my own, inspired by Nine Inch Nails. TurboSwine is not affiliated with or endorsed by Avid, Digidesign or Nine Inch Nails.</p>
+    <p>Made by <a href="../">Brownie Digital</a>, a one-person maker. Guinea pigs supervised.</p>
+  </div>
+</footer>
+
+<script src="turboswine.js?v=20" defer></script>
+</body>
+</html>
